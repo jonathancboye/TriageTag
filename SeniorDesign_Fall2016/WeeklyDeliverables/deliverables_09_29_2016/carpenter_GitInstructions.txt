@@ -1,0 +1,21 @@
+Setup Git
+
+      Step 1) Create a BitBucket account here: https://bitbucket.org
+      Step 2) Download Git from here: https://git-scm.com/downloads
+      Step 3) Download SourceTree here: https://www.sourcetreeapp.com/
+      Step 4) Link SourceTree to BitBucket account.
+
+      All set :)
+      
+Git Usage
+      
+      Clone - Get exact copy of project
+
+      Pull - Get latest changes of project
+
+      Push - Update project with your changes
+
+      Branch - Creates a copy of the project and allows you to make
+      changes without effecting the master branch.
+
+      Merge - Takes two branches and tries to combine them into one.
