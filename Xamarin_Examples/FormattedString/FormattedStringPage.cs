@@ -11,7 +11,7 @@ namespace Greetings
             FormattedString formattedString = new FormattedString {
                Spans = {
                    new Span {
-                        Text = "Xamarin",
+                        Text = "\u201CXamarin\u201D",
                         FontSize = Device.GetNamedSize( NamedSize.Large, typeof( Label ) ),
                         FontAttributes = FontAttributes.Bold | FontAttributes.Italic
                     },
@@ -30,7 +30,9 @@ namespace Greetings
             Content = new Label {
                 FormattedText = formattedString,
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
+                VerticalOptions = LayoutOptions.Center,
+                BackgroundColor = Color.Black,
+                TextColor = Color.Lime
             };
 
         }
