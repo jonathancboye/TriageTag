@@ -9,21 +9,24 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Scan Tag"
                 FontSize="Large"
-                Font="Bold" />
+                Font="Bold"
+                Clicked="OnScanTagButtonClicked"/>
         
         <Button x:Name="editMedicalDataButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"
                 Text="Edit Medical Data"
                 FontSize="Large"
-                Font="Bold" />
+                Font="Bold"
+                Clicked="OnEditMedicalDataButtonClicked"/>
 
         <Button x:Name="synchronizeButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"
-                Text="SynchronizeButton"
+                Text="Synchronize"
                 FontSize="Large"
-                Font="Bold" />
+                Font="Bold"
+                Clicked="OnSynchronizeButtonClicked"/>
 
         <Button x:Name="logoutButton"
                 VerticalOptions="CenterAndExpand"

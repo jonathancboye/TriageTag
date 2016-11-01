@@ -39,10 +39,19 @@
       <DependentUpon>ActivitiesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
+    <Compile Include="DisplayMedicalDatapage.xaml.cs">
+      <DependentUpon>DisplayMedicalDatapage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditMedicalDataPage.xaml.cs">
+      <DependentUpon>EditMedicalDataPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScanPage.xaml.cs">
+      <DependentUpon>ScanPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SynchronizingPage.xaml.cs">
       <DependentUpon>SynchronizingPage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +87,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SynchronizingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ScanPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EditMedicalDataPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DisplayMedicalDatapage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

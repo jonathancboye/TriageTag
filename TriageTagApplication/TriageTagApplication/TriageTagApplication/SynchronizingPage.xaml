@@ -12,9 +12,8 @@
         <Button x:Name="cancelButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"
-                Text="Cancel Button" 
-                Font="Bold"/>
-
-
+                Text="Cancel Button"
+                Font="Bold"
+                Clicked="OnCancelButtonClicked"/>
     </StackLayout>
 </ContentPage>

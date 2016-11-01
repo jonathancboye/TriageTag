@@ -19,5 +19,17 @@ namespace TriageTagApplication
         private void OnLogoutButtonClicked( object sender, EventArgs e ) {
             application.MainPage = application.loginPage;
         }
+
+        private void OnScanTagButtonClicked( object sender, EventArgs e ) {
+            application.MainPage = application.scanPage;
+        }
+
+        private void OnEditMedicalDataButtonClicked( object sender, EventArgs e ) {
+            application.MainPage = application.editMedicalDataPage;
+        }
+
+        private void OnSynchronizeButtonClicked( object sender, EventArgs e ) {
+            application.MainPage = application.synchornizingPage;
+        }
     }
 }
