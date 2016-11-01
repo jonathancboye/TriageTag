@@ -8,12 +8,11 @@ using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
-    public partial class LoginPage : ContentPage
+    public partial class ActivitiesPage : ContentPage
     {
         App application = Application.Current as App;
 
-        public LoginPage() {
-            Padding = new Thickness( 5, 5, 5, 5 );
+        public ActivitiesPage() {
             InitializeComponent();
         }
     }

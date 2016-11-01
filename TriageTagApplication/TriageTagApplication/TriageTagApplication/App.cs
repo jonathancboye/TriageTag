@@ -10,7 +10,7 @@ namespace TriageTagApplication
     public class App : Application
     {
         public App() {
-            MainPage = new LoginPage();
+            MainPage = new ActivitiesPage();
         }
 
         protected override void OnStart() {

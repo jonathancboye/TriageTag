@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriageTagApplication.ActivitiesPage">
+    <StackLayout VerticalOptions="Fill"
+                 HorizontalOptions="Fill">
+        <Button x:Name="scanTagButton"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Scan Tag"
+                FontSize="Large"
+                Font="Bold" />
+        
+        <Button x:Name="editMedicalDataButton"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Edit Medical Data"
+                FontSize="Large"
+                Font="Bold" />
+
+        <Button x:Name="synchronizeButton"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="SynchronizeButton"
+                FontSize="Large"
+                Font="Bold" />
+
+        <Button x:Name="logoutButton"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Logout Button"
+                FontSize="Large"
+                Font="Bold" />
+    </StackLayout>
+</ContentPage>
