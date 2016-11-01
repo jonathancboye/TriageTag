@@ -4,7 +4,8 @@
              x:Class="TriageTagApplication.LoginPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Fill"
-                     HorizontalOptions="Fill">
+                     HorizontalOptions="Fill"
+                     BackgroundColor="White">
 
             <Label Text="Triage Tag Application"
                    HorizontalTextAlignment="Center"
@@ -13,20 +14,23 @@
                    Font="Bold"
                    FontSize="Large" />
 
-                <StackLayout VerticalOptions="Fill"
-                             HorizontalOptions="Fill">
-                    <Entry x:Name="username"
-                           Placeholder="Username" />
-                    <Entry x:Name="password"
-                           Placeholder="Password"
-                           IsPassword="True" />
-                </StackLayout>
+            <StackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Fill">
+                <Entry x:Name="username"
+                       Placeholder="Username"
+                       TextChanged="OnTextChanged" />
+                <Entry x:Name="password"
+                       Placeholder="Password"
+                       IsPassword="True" />
+            </StackLayout>
 
-                <Button x:Name="loginButton"
+            <Button x:Name="loginButton"
                     Text="Login"
                     Font="Large"
                     VerticalOptions="EndAndExpand"
-                    HorizontalOptions="CenterAndExpand" />
+                    HorizontalOptions="CenterAndExpand"
+                    IsEnabled="False"
+                    Clicked="OnButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

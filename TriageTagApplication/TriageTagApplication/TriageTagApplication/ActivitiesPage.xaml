@@ -30,6 +30,7 @@
                 HorizontalOptions="CenterAndExpand"
                 Text="Logout Button"
                 FontSize="Large"
-                Font="Bold" />
+                Font="Bold"
+                 />
     </StackLayout>
 </ContentPage>

@@ -9,7 +9,15 @@ namespace TriageTagApplication
 {
     public class App : Application
     {
+        public LoginPage loginPage;
+        public ActivitiesPage activitiesPage;
+        public SynchronizingPage synchornizingPage;
+
         public App() {
+            loginPage = new LoginPage();
+            activitiesPage = new ActivitiesPage();
+            synchornizingPage = new SynchronizingPage();
+             
             MainPage = new LoginPage();
         }
 

@@ -15,5 +15,9 @@ namespace TriageTagApplication
         public ActivitiesPage() {
             InitializeComponent();
         }
+
+       //private void OnLogoutButtonClicked() {
+       //     application.MainPage = application.loginPage;
+       // }
     }
 }
