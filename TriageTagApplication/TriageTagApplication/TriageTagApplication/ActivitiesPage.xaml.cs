@@ -16,8 +16,8 @@ namespace TriageTagApplication
             InitializeComponent();
         }
 
-       //private void OnLogoutButtonClicked() {
-       //     application.MainPage = application.loginPage;
-       // }
+        private void OnLogoutButtonClicked( object sender, EventArgs e ) {
+            application.MainPage = application.loginPage;
+        }
     }
 }
