@@ -5,39 +5,28 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="Fill"
                      HorizontalOptions="Fill">
-  
+
             <Label Text="Triage Tag Application"
                    HorizontalTextAlignment="Center"
                    VerticalOptions="StartAndExpand"
                    TextColor="Black"
                    Font="Bold"
-                   FontSize="Large"/>
-
-            <Label x:Name="username"
-                   Text="Username"
-                   IsVisible="True"
-                   Opacity="0.50"
-                   HorizontalTextAlignment="Center"
-                   VerticalOptions="Center"
-                   TextColor="Black"
-                   BackgroundColor="White"
                    FontSize="Large" />
 
-            <Label x:Name="password"
-                   Text="Password"
-                   IsVisible="True"
-                   Opacity="0.50"
-                   HorizontalTextAlignment="Center"
-                   VerticalOptions="Center"
-                   TextColor="Black"
-                   BackgroundColor="White"
-                   FontSize="Large" />
+                <StackLayout VerticalOptions="Fill"
+                             HorizontalOptions="Fill">
+                    <Entry x:Name="username"
+                           Placeholder="Username" />
+                    <Entry x:Name="password"
+                           Placeholder="Password"
+                           IsPassword="True" />
+                </StackLayout>
 
-            <Button x:Name="loginButton"
+                <Button x:Name="loginButton"
                     Text="Login"
                     Font="Large"
                     VerticalOptions="EndAndExpand"
-                    HorizontalOptions="StartAndExpand" />
+                    HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

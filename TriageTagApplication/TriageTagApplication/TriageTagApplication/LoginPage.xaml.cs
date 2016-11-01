@@ -13,7 +13,7 @@ namespace TriageTagApplication
         App application = Application.Current as App;
 
         public LoginPage() {
-            Padding = new Thickness( 5, 5, 5, 5 );
+            Padding = new Thickness( 5, 20, 5, 20 );
             InitializeComponent();
         }
     }
