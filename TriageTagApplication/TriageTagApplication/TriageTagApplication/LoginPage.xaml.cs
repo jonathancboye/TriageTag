@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SQLite.Net;
+
 using Xamarin.Forms;
 
 namespace TriageTagApplication
@@ -30,6 +32,7 @@ namespace TriageTagApplication
         }
 
         private void OnButtonClicked( object sender, EventArgs e ) {
+            SQLiteConnection connection = DependencyService.Get<ISQLite>().GetConnection();
             application.MainPage = application.activitiesPage;
         }
     }
