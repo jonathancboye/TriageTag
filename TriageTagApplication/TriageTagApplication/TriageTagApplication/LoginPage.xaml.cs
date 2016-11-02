@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using SQLite.Net;
 
@@ -33,6 +34,7 @@ namespace TriageTagApplication
 
         private void OnButtonClicked( object sender, EventArgs e ) {
             SQLiteConnection connection = DependencyService.Get<ISQLite>().GetConnection();
+            Debug.WriteLine("Hello");
             application.MainPage = application.activitiesPage;
         }
     }
