@@ -13,7 +13,7 @@ namespace TriageTagApplication
 {
     public partial class LoginPage : ContentPage
     {
-        App application = Application.Current as App;
+        App app = Application.Current as App;
 
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
@@ -32,10 +32,14 @@ namespace TriageTagApplication
 
         }
 
-        private void OnButtonClicked( object sender, EventArgs e ) {
-            SQLiteConnection connection = DependencyService.Get<ISQLite>().GetConnection();
-            Debug.WriteLine("Hello");
-            application.MainPage = application.activitiesPage;
+        async private void OnButtonClicked( object sender, EventArgs e ) {
+            app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
+            TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
+            List<Users> users = app.dbConnection.Query<Users>( "SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
+            if(users.Count == 1 ) {
+                app.UID = users[0].employeeId;
+                app.MainPage = app.activitiesPage;
+            }
         }
     }
 }

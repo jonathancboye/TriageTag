@@ -19,6 +19,7 @@
                 <Entry x:Name="username"
                        Placeholder="Username"
                        TextChanged="OnTextChanged" />
+               
                 <Entry x:Name="password"
                        Placeholder="Password"
                        IsPassword="True" />
@@ -30,6 +31,7 @@
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     IsEnabled="False"
+                    BackgroundColor="Gray"
                     Clicked="OnButtonClicked" />
         </StackLayout>
     </ContentPage.Content>

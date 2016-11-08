@@ -10,6 +10,6 @@ namespace TriageTagApplication
 {
     public interface ISQLite
     {
-        SQLiteConnection GetConnection();
+        Task<SQLiteConnection> getConnection();
     }
 }

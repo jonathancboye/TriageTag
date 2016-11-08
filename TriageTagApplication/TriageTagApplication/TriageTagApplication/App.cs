@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SQLite.Net;
 
 using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
-    public class App : Application
+    public class App: Application
     {
+        public SQLiteConnection dbConnection;
+        public int UID;
         public LoginPage loginPage;
         public ActivitiesPage activitiesPage;
         public SynchronizingPage synchornizingPage;
@@ -23,7 +26,7 @@ namespace TriageTagApplication
             scanPage = new ScanPage();
             editMedicalDataPage = new EditMedicalDataPage();
             displayMedicalDataPage = new DisplayMedicalDatapage();
-             
+
             MainPage = new LoginPage();
         }
 

@@ -10,19 +10,19 @@ using SQLite.Net;
 using TriageTagApplication.UWP;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(SQLite_UWP))]
+[assembly: Dependency( typeof( SQLite_UWP ) )]
 namespace TriageTagApplication.UWP
 {
-    class SQLite_UWP : ISQLite
+    class SQLite_UWP: ISQLite
     {
         public SQLite_UWP() { }
 
-        public SQLiteConnection GetConnection()
-        {
-            //This is an example of how one would might creat a connection to a database file
-            string sqliteFilename = "users.db3";
-            string path = Path.Combine( KnownFolders.DocumentsLibrary.Path, sqliteFilename );
-            SQLiteConnection connection = new SQLiteConnection( new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path );
+        async public Task<SQLiteConnection> getConnection() {
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+            StorageFile databaseFile = await localFolder.CreateFileAsync("database.db3", CreationCollisionOption.ReplaceExisting);
+            SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path);
+
+            System.Diagnostics.Debug.WriteLine( databaseFile.Path );
             return connection;
         }
     }
