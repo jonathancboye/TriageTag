@@ -32,12 +32,10 @@ namespace TriageTagApplication
             }
 
             grid = new Grid();
-            Type type = typeof(MedicalHistory);
-            List<FieldInfo> fields = type.GetRuntimeFields() as List<FieldInfo>;
 
             //Create a row definition for each field
-            foreach ( FieldInfo field in fields ) {
-                grid.RowDefinitions.Add( new RowDefinition() );
+            for(int i=0;i<6;i++ ) {
+                grid.RowDefinitions.Add( new RowDefinition() { Height = new GridLength( 1, GridUnitType.Star ) });
             }
 
             // column definition for name of medical history
@@ -46,7 +44,8 @@ namespace TriageTagApplication
             grid.ColumnDefinitions.Add( new ColumnDefinition() );
 
 
-            // Labels to add to grid
+            // Key Labels to add to grid
+       
             List<Label> k_labels = new List<Label> {
                 new Label {
                     Text = "Employee ID"
@@ -68,6 +67,7 @@ namespace TriageTagApplication
                 }
             };
 
+            //Value Labels to add to grid
             List<Label> v_labels = new List<Label> {
 
                 new Label {
@@ -89,14 +89,30 @@ namespace TriageTagApplication
                     Text = mhistory.primaryDoctor
                 }
             };
+
+            // Set Key Labes in grid
+            for(int i=0; i<k_labels.Count; i++ ) {
+                Grid.SetRow( k_labels[i], i );
+                Grid.SetColumn( k_labels[i], 0 );
+                grid.Children.Add( k_labels[i] );
+            }
+
+            // Set Value Labels in grid
+            for(int i=0; i<v_labels.Count; i++ ) {
+                Grid.SetRow( v_labels[i], i );
+                Grid.SetColumn( k_labels[i], 1 );
+                grid.Children.Add( v_labels[i] );
+            }
+
+            scrollView.Content = grid;
         }
 
         private void OnSaveButtonClicked( object sender, EventArgs e ) {
             //TODO Implement OnSaveButtonClicked
         }
 
-        private void OnCancelButtonClicked( object sender, EventArgs e ) {
-            app.MainPage = app.activitiesPage;
+        async private void OnCancelButtonClicked( object sender, EventArgs e ) {
+            await Navigation.PopAsync();
         }
     }
 }

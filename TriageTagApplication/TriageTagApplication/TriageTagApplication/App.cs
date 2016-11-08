@@ -12,21 +12,21 @@ namespace TriageTagApplication
     {
         public SQLiteConnection dbConnection; // Database Connection
         public int UID; // Current logged in user
-        public LoginPage loginPage;
-        public ActivitiesPage activitiesPage;
-        public SynchronizingPage synchornizingPage;
-        public ScanPage scanPage;
-        public EditMedicalDataPage editMedicalDataPage;
-        public DisplayMedicalDatapage displayMedicalDataPage;
+        //public LoginPage loginPage;
+        //public ActivitiesPage activitiesPage;
+        //public SynchronizingPage synchornizingPage;
+        //public ScanPage scanPage;
+        //public EditMedicalDataPage editMedicalDataPage;
+        //public DisplayMedicalDatapage displayMedicalDataPage;
 
         public App() {
-            loginPage = new LoginPage();
-            activitiesPage = new ActivitiesPage();
-            synchornizingPage = new SynchronizingPage();
-            scanPage = new ScanPage();
-            editMedicalDataPage = new EditMedicalDataPage();
-            displayMedicalDataPage = new DisplayMedicalDatapage();
-            MainPage = new LoginPage();
+            //loginPage = new LoginPage();
+            //activitiesPage = new ActivitiesPage();
+            //synchornizingPage = new SynchronizingPage();
+            //scanPage = new ScanPage();
+            //editMedicalDataPage = new EditMedicalDataPage();
+            //displayMedicalDataPage = new DisplayMedicalDatapage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart() {

@@ -29,15 +29,20 @@ namespace TriageTagApplication.Droid
         async public Task<SQLiteConnection> getConnection() {
             //File IO on Android is done with System.IO API
 
+            FileStream fs;
+
             //This is an example of how one would might creat a connection to a database file
             string sqliteFilename = "database.db3";
             string filePath = Path.Combine( System.Environment.CurrentDirectory, sqliteFilename ); // Documents folder
             
             //Create database file
             //if( !File.Exists( filePath ) ) {
-                FileStream fs = File.Create( filePath );
-                fs.Close();
-            // }
+            //    fs = File.Open( filePath );
+            //}else {
+                fs = File.Create( filePath );
+            //}
+
+            fs.Close();
 
             //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), filePath);

@@ -35,31 +35,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ActivitiesPage.xaml.cs">
+    <Compile Include="ViewPages\ActivitiesPage.xaml.cs">
       <DependentUpon>ActivitiesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="DisplayMedicalDatapage.xaml.cs">
+    <Compile Include="ViewPages\DisplayMedicalDatapage.xaml.cs">
       <DependentUpon>DisplayMedicalDatapage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditMedicalDataPage.xaml.cs">
+    <Compile Include="ViewPages\EditMedicalDataPage.xaml.cs">
       <DependentUpon>EditMedicalDataPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs" />
-    <Compile Include="ISQLite.cs" />
-    <Compile Include="LoginPage.xaml.cs">
+    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\ISQLite.cs" />
+    <Compile Include="ViewPages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MedicalHistory.cs" />
+    <Compile Include="Model\MedicalHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScanPage.xaml.cs">
+    <Compile Include="ViewPages\ScanPage.xaml.cs">
       <DependentUpon>ScanPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SynchronizingPage.xaml.cs">
+    <Compile Include="ViewPages\SynchronizingPage.xaml.cs">
       <DependentUpon>SynchronizingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestDatabase.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="Model\TestDatabase.cs" />
+    <Compile Include="Model\Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -83,41 +83,42 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LoginPage.xaml">
+    <EmbeddedResource Include="ViewPages\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ActivitiesPage.xaml">
+    <EmbeddedResource Include="ViewPages\ActivitiesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SynchronizingPage.xaml">
+    <EmbeddedResource Include="ViewPages\SynchronizingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ScanPage.xaml">
+    <EmbeddedResource Include="ViewPages\ScanPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EditMedicalDataPage.xaml">
+    <EmbeddedResource Include="ViewPages\EditMedicalDataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DisplayMedicalDatapage.xaml">
+    <EmbeddedResource Include="ViewPages\DisplayMedicalDatapage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

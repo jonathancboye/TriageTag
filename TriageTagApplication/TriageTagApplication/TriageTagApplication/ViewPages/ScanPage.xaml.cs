@@ -8,16 +8,16 @@ using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
-    public partial class DisplayMedicalDatapage : ContentPage
+    public partial class ScanPage : ContentPage
     {
         App application = Application.Current as App;
 
-        public DisplayMedicalDatapage() {
+        public ScanPage() {
             InitializeComponent();
         }
 
-        private void OnBackButtonClicked( object sender, EventArgs e ) {
-            application.MainPage = application.activitiesPage;    
+        async private void OnCancelButtonClicked( object sender, EventArgs e ) {
+            await Navigation.PopAsync();
         }
     }
 }

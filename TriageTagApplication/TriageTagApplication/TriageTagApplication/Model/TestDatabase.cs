@@ -62,7 +62,7 @@ namespace TriageTagApplication
 
             connection.Insert( new MedicalHistory {
                 employeeId = 1,
-                Allergies = "cats, dogs, horses, dust",
+                allergies = "cats, dogs, horses, dust",
                 bloodType = "O",
                 religion = "Atheist",
                 highBloodPressure = false,

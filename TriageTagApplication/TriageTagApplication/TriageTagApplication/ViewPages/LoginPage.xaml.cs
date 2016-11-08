@@ -38,10 +38,6 @@ namespace TriageTagApplication
             } else {
                 validate();
             }
-
-            // Reset Entry fields
-            username.Text = "";
-            password.Text = "";
         }
 
         async private void makeConnection() {
@@ -54,19 +50,24 @@ namespace TriageTagApplication
             connectionMade = true;
 
             validate();
+
+           
         }
 
-        private void validate() {
+        async private void validate() {
             // Query database for user
             List<Users> users = app.dbConnection.Query<Users>( "SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
             if ( users.Count == 1 ) {
-                // Set UID so we know who the which user logged
+                // Set UID so we know which user logged
                 app.UID = users[0].employeeId;
-                app.MainPage = app.activitiesPage;
-                invalidText.IsVisible = false;
+                await Navigation.PushAsync( new ActivitiesPage() );
             } else {
                 invalidText.IsVisible = true;
             }
+
+            // Clear text fields
+            username.Text = "";
+            password.Text = "";
         }
     }
 }
