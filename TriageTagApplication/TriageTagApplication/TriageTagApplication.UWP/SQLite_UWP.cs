@@ -15,11 +15,18 @@ namespace TriageTagApplication.UWP
 {
     class SQLite_UWP: ISQLite
     {
+        //Must have an empty constructor
         public SQLite_UWP() { }
 
+        // Returns: SQLiteConnection from a database file
         async public Task<SQLiteConnection> getConnection() {
+            //File IO in UWP app is done with Windows.Storage API
+
+            //Create database file
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             StorageFile databaseFile = await localFolder.CreateFileAsync("database.db3", CreationCollisionOption.ReplaceExisting);
+
+            //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path);
 
             System.Diagnostics.Debug.WriteLine( databaseFile.Path );

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Callbacks.CallbackPage">
+    <StackLayout VerticalOptions="CenterAndExpand"
+                 HorizontalOptions="CenterAndExpand">
+        <Label x:Name="label"
+               Text="Button not pressed"
+               Font="Bold"
+               FontSize="Large" />
+
+        <Button x:Name="button"
+                Text="Connect to Database"
+                Font="Bold"
+                FontSize="Large"
+                Clicked="OnButtonClicked" />
+        <ScrollView>
+            <StackLayout x:Name="scrollingStack" />
+        </ScrollView>
+    <Button x:Name="insertButton"
+                Text="Insert Button"
+                Font="Bold"
+                FontSize="Large"
+                Clicked="OnInsertButtonClicked" />
+    </StackLayout>
+</ContentPage>

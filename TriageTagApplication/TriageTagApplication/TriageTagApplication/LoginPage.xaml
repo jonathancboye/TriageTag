@@ -16,13 +16,19 @@
 
             <StackLayout VerticalOptions="Fill"
                          HorizontalOptions="Fill">
+                <Label x:Name="invalidText"
+                       Text="Invalid Username/Password"
+                       TextColor="Red"
+                       IsVisible="False" />
+                
                 <Entry x:Name="username"
                        Placeholder="Username"
                        TextChanged="OnTextChanged" />
                
                 <Entry x:Name="password"
                        Placeholder="Password"
-                       IsPassword="True" />
+                       IsPassword="True" 
+                       TextChanged="OnTextChanged" />
             </StackLayout>
 
             <Button x:Name="loginButton"
