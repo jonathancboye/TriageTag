@@ -20,8 +20,8 @@ namespace TriageTagApplication
 
             connection.Insert( new Users {
                 employeeId = 1,
-                username = "Jonathan",
-                password = "Carpenter"
+                username = "a",
+                password = "a"
             } );
 
             connection.Insert( new Users {

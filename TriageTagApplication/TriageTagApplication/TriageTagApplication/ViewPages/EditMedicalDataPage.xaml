@@ -2,19 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriageTagApplication.EditMedicalDataPage">
-    <StackLayout>
+    <StackLayout VerticalOptions="Fill"
+                 HorizontalOptions="Fill">
         <ScrollView x:Name="scrollView" />
 
-        <Button x:Name="saveButton"
-                Text="Save Button"
+        <Button x:Name="editButton"
+                Text="Edit"
                 Font="Bold"
                 FontSize="Large"
+                IsEnabled="False"
+                BackgroundColor="Gray"
+                VerticalOptions="End"
+                Clicked="OnEditButtonClicked" />
+
+        <Button x:Name="saveButton"
+                Text="Save"
+                Font="Bold"
+                FontSize="Large"
+                BackgroundColor="Gray"
+                VerticalOptions="End"
                 Clicked="OnSaveButtonClicked" />
         
-        <Button x:Name="cancelButton"
-                Text="Cancel Button"
+        <Button x:Name="backButton"
+                Text="Back"
                 Font="Bold"
                 FontSize="Large"
-                Clicked="OnCancelButtonClicked" />
+                BackgroundColor="Gray"
+                VerticalOptions="End"
+                Clicked="OnbackButtonClicked" />
     </StackLayout>
 </ContentPage>

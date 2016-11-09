@@ -13,8 +13,7 @@ namespace TriageTagApplication
         public SQLiteConnection dbConnection; // Database Connection
         public int UID; // Current logged in user
 
-        public App() {
-           
+        public App() {        
             MainPage = new NavigationPage(new LoginPage());
         }
 

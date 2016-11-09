@@ -13,6 +13,8 @@ namespace TriageTagApplication
     {
         App app = Application.Current as App;
         Grid grid;
+        List<Entry> entrys;
+        List<Label> labels;
 
         public EditMedicalDataPage() {
             InitializeComponent();
@@ -20,6 +22,8 @@ namespace TriageTagApplication
         }
 
         private void makeGrid() {
+            int numberOfLables = 6; // Number of columns in the Medical History Table
+
             // Check for medical history
             MedicalHistory mhistory;
             List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID );
@@ -34,19 +38,17 @@ namespace TriageTagApplication
             grid = new Grid();
 
             //Create a row definition for each field
-            for(int i=0;i<6;i++ ) {
-                grid.RowDefinitions.Add( new RowDefinition() { Height = new GridLength( 1, GridUnitType.Star ) });
+            for ( int i = 0; i < numberOfLables; i++ ) {
+                grid.RowDefinitions.Add( new RowDefinition() { Height = new GridLength( 0.5, GridUnitType.Star ) } );
             }
 
             // column definition for name of medical history
-            grid.ColumnDefinitions.Add( new ColumnDefinition() );
+            grid.ColumnDefinitions.Add( new ColumnDefinition() { Width = new GridLength( 1, GridUnitType.Star ) } );
             // column definition for value of medical history 
-            grid.ColumnDefinitions.Add( new ColumnDefinition() );
+            grid.ColumnDefinitions.Add( new ColumnDefinition() { Width = new GridLength( 3, GridUnitType.Star ) } );
 
-
-            // Key Labels to add to grid
-       
-            List<Label> k_labels = new List<Label> {
+            // Labels to add to grid      
+            labels = new List<Label> {
                 new Label {
                     Text = "Employee ID"
                 },
@@ -67,52 +69,78 @@ namespace TriageTagApplication
                 }
             };
 
-            //Value Labels to add to grid
-            List<Label> v_labels = new List<Label> {
+            // Entrys to add to grid
+            entrys = new List<Entry> {
 
-                new Label {
-                    Text = mhistory.employeeId.ToString()
+                new Entry {
+                    Text = mhistory.employeeId.ToString(),
                 },
-                new Label {
-                    Text = mhistory.allergies
+                new Entry {
+                    Text = mhistory.allergies,
                 },
-                new Label {
-                    Text = mhistory.bloodType
+                new Entry {
+                    Text = mhistory.bloodType,
                 },
-                new Label {
-                    Text = mhistory.highBloodPressure.ToString()
+                new Entry {
+                    Text = mhistory.highBloodPressure.ToString(),
                 },
-                new Label {
-                    Text = mhistory.medications
+                new Entry {
+                    Text = mhistory.medications,
                 },
-                new Label {
-                    Text = mhistory.primaryDoctor
+                new Entry {
+                    Text = mhistory.primaryDoctor,
                 }
             };
 
-            // Set Key Labes in grid
-            for(int i=0; i<k_labels.Count; i++ ) {
-                Grid.SetRow( k_labels[i], i );
-                Grid.SetColumn( k_labels[i], 0 );
-                grid.Children.Add( k_labels[i] );
+            // put labes in grid
+            for ( int i = 0; i < labels.Count; i++ ) {
+                Grid.SetRow( labels[i], i );
+                Grid.SetColumn( labels[i], 0 );
+
+                labels[i].HorizontalTextAlignment = TextAlignment.Center;
+                if ( i % 2 == 0 ) {
+                    labels[i].BackgroundColor = Color.Aqua;
+                }
+
+                grid.Children.Add( labels[i] );
             }
 
-            // Set Value Labels in grid
-            for(int i=0; i<v_labels.Count; i++ ) {
-                Grid.SetRow( v_labels[i], i );
-                Grid.SetColumn( k_labels[i], 1 );
-                grid.Children.Add( v_labels[i] );
+            // put entrys in grid
+            for ( int i = 0; i < entrys.Count; i++ ) {
+                // format entrys in grid
+                Grid.SetRow( entrys[i], i );
+                Grid.SetColumn( entrys[i], 1 );
+
+                entrys[i].HorizontalTextAlignment = TextAlignment.Center;
+                entrys[i].IsEnabled = false;
+                
+                grid.Children.Add( entrys[i] );
             }
+
+            editButton.IsEnabled = true;
 
             scrollView.Content = grid;
         }
 
-        private void OnSaveButtonClicked( object sender, EventArgs e ) {
-            //TODO Implement OnSaveButtonClicked
+        private void isEditable(bool editable) {
+            for(int i = 0; i < entrys.Count; i++ ) {
+                entrys[i].IsEnabled = editable;
+            }
         }
 
-        async private void OnCancelButtonClicked( object sender, EventArgs e ) {
+        private void OnSaveButtonClicked( object sender, EventArgs e ) {
+            // TODO: Save changes to database
+
+            isEditable( false );
+        }
+
+        private void OnEditButtonClicked( object sender, EventArgs e ) {
+            isEditable( true );
+        }
+
+        async private void OnbackButtonClicked( object sender, EventArgs e ) {
             await Navigation.PopAsync();
+
         }
     }
 }
