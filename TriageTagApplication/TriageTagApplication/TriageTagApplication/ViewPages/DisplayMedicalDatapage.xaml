@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriageTagApplication.DisplayMedicalDatapage">
     <StackLayout>
+        <ScrollView x:Name="scrollView" />
+        
         <Button x:Name="backButton"
                 Text="Back Button"
                 Font="Bold"
