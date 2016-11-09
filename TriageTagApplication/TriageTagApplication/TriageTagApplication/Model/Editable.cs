@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel;
+
+namespace TriageTagApplication.Model
+{
+    class Editable: INotifyPropertyChanged
+    {
+        bool isEditable;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool IsEditable {
+            get {
+                return isEditable;
+            }
+            set {
+                if(isEditable != value ) {
+                    isEditable = value;   
+                }
+            }
+        }
+    }
+}

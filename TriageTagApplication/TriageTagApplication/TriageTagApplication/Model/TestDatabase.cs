@@ -65,7 +65,7 @@ namespace TriageTagApplication
                 allergies = "cats, dogs, horses, dust",
                 bloodType = "O",
                 religion = "Atheist",
-                highBloodPressure = false,
+                highBloodPressure = "no",
                 medications = "inhaler",
                 primaryDoctor = "Dr. Randel"
             } );

@@ -12,12 +12,15 @@ namespace TriageTagApplication
     public partial class EditMedicalDataPage : ContentPage
     {
         App app = Application.Current as App;
-        Grid grid;
-        List<Entry> entrys;
-        List<Label> labels;
+        MedicalHistory mhistory;
+
+        public bool canEdit { get; set; }
 
         public EditMedicalDataPage() {
             InitializeComponent();
+            canEdit = false;
+            this.BindingContext = this;
+            canEdit = false;
             makeGrid();
         }
 
@@ -25,7 +28,6 @@ namespace TriageTagApplication
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
             // Check for medical history
-            MedicalHistory mhistory;
             List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID );
             if ( mhistorys.Count > 0 ) {
                 mhistory = mhistorys[0];
@@ -35,7 +37,9 @@ namespace TriageTagApplication
                 return;
             }
 
-            grid = new Grid();
+            Grid grid = new Grid();
+            grid.BindingContext = mhistory;
+            scrollView.BindingContext = this;
 
             //Create a row definition for each field
             for ( int i = 0; i < numberOfLables; i++ ) {
@@ -47,100 +51,56 @@ namespace TriageTagApplication
             // column definition for value of medical history 
             grid.ColumnDefinitions.Add( new ColumnDefinition() { Width = new GridLength( 3, GridUnitType.Star ) } );
 
-            // Labels to add to grid      
-            labels = new List<Label> {
-                new Label {
-                    Text = "Employee ID"
-                },
-                new Label {
-                    Text = "Allergies"
-                },
-                new Label {
-                    Text = "Blood Type"
-                },
-                new Label {
-                    Text = "Religion"
-                },
-                new Label {
-                    Text = "Medications"
-                },
-                new Label {
-                    Text = "Primary Doctor"
-                }
-            };
-
-            // Entrys to add to grid
-            entrys = new List<Entry> {
-
-                new Entry {
-                    Text = mhistory.employeeId.ToString(),
-                },
-                new Entry {
-                    Text = mhistory.allergies,
-                },
-                new Entry {
-                    Text = mhistory.bloodType,
-                },
-                new Entry {
-                    Text = mhistory.highBloodPressure.ToString(),
-                },
-                new Entry {
-                    Text = mhistory.medications,
-                },
-                new Entry {
-                    Text = mhistory.primaryDoctor,
-                }
-            };
-
-            // put labes in grid
-            for ( int i = 0; i < labels.Count; i++ ) {
-                Grid.SetRow( labels[i], i );
-                Grid.SetColumn( labels[i], 0 );
-
-                labels[i].HorizontalTextAlignment = TextAlignment.Center;
-                if ( i % 2 == 0 ) {
-                    labels[i].BackgroundColor = Color.Aqua;
-                }
-
-                grid.Children.Add( labels[i] );
-            }
-
-            // put entrys in grid
-            for ( int i = 0; i < entrys.Count; i++ ) {
-                // format entrys in grid
-                Grid.SetRow( entrys[i], i );
-                Grid.SetColumn( entrys[i], 1 );
-
-                entrys[i].HorizontalTextAlignment = TextAlignment.Center;
-                entrys[i].IsEnabled = false;
-                
-                grid.Children.Add( entrys[i] );
-            }
+            // Add rows to grid
+            int rownumber = 0;
+            addGridRow( ref grid, "Allergies", "allergies", rownumber++ );
+            addGridRow( ref grid, "Blood Type", "bloodType", rownumber++ );
 
             editButton.IsEnabled = true;
 
             scrollView.Content = grid;
         }
 
-        private void isEditable(bool editable) {
-            for(int i = 0; i < entrys.Count; i++ ) {
-                entrys[i].IsEnabled = editable;
+        // Places Lables and Entrys into grid
+        private void addGridRow(ref Grid grid, string labelText, string binding, int rownumber) {
+            Color bgColor;
+
+            if ( rownumber % 2 == 0 ) {
+                bgColor = Color.Gray;
+            }else {
+                bgColor = Color.Aqua;
             }
+
+            // add label to grid
+            Label label = new Label { Text = labelText };
+            label.BackgroundColor = bgColor;
+            label.HorizontalTextAlignment = TextAlignment.Center;
+            label.VerticalTextAlignment = TextAlignment.Center;
+            Grid.SetRow( label, rownumber );
+            Grid.SetColumn( label, 0 );
+            grid.Children.Add( label );
+
+            //add entry to grid
+            Entry entry = new Entry();
+            entry.HorizontalTextAlignment = TextAlignment.Center;
+            entry.SetBinding( Entry.TextProperty, binding );
+            entry.SetBinding( Entry.IsEnabledProperty, "canEdit" );
+            Grid.SetRow( entry, rownumber );
+            Grid.SetColumn( entry, 1 );
+            grid.Children.Add( entry );
         }
 
-        private void OnSaveButtonClicked( object sender, EventArgs e ) {
-            // TODO: Save changes to database
-
-            isEditable( false );
+        private void OnSaveButtonClicked( object sender, EventArgs e ) {          
+            app.dbConnection.Update( mhistory );
+            canEdit = false;  
         }
 
         private void OnEditButtonClicked( object sender, EventArgs e ) {
-            isEditable( true );
+            canEdit = true;
         }
 
         async private void OnbackButtonClicked( object sender, EventArgs e ) {
             await Navigation.PopAsync();
-
         }
     }
 }

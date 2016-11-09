@@ -16,7 +16,7 @@ namespace TriageTagApplication
         public string allergies { get; set; }
         public string bloodType { get; set; }
         public string religion { get; set; }
-        public bool highBloodPressure { get; set; }
+        public string highBloodPressure { get; set; }
         public string medications { get; set; }
         public string primaryDoctor { get; set; }
     }
