@@ -13,7 +13,7 @@ namespace TriageTagApplication
     {
         App app = Application.Current as App;
         MedicalHistory mhistory;
-        Editable editable;
+        Editable editable;  // If true then Entrys are editable
 
         public EditMedicalDataPage() {
             editable = new Editable() {
@@ -40,7 +40,7 @@ namespace TriageTagApplication
 
             Grid grid = new Grid();
 
-            //Create a row definition for each field
+            // Create a row definition for each field
             for ( int i = 0; i < numberOfLables; i++ ) {
                 grid.RowDefinitions.Add( new RowDefinition() { Height = new GridLength( 0.5, GridUnitType.Star ) } );
             }
