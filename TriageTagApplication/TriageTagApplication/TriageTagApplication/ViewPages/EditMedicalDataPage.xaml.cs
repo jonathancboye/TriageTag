@@ -18,13 +18,12 @@ namespace TriageTagApplication
             editable = new Editable() {
                 IsEditable = false
             };
-
            
             InitializeComponent();
-            makeGrid();
+            makeEditableGrid();
         }
 
-        private void makeGrid() {
+        private void makeEditableGrid() {
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
             // Check for medical history
@@ -64,8 +63,8 @@ namespace TriageTagApplication
 
         // Places Lables and Entrys into grid
         private void addGridRow( ref Grid grid, string labelText, string binding, int rownumber ) {
+            // Alternate row colors in grid
             Color bgColor;
-
             if ( rownumber % 2 == 0 ) {
                 bgColor = Color.Fuchsia;
             } else {
@@ -100,7 +99,9 @@ namespace TriageTagApplication
         }
 
         private void OnSaveButtonClicked( object sender, EventArgs e ) {
+            // Update the database
             app.dbConnection.Update( mhistory );
+
             editable.IsEditable = false;
         }
 

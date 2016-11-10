@@ -14,6 +14,11 @@ namespace TriageTagApplication
 
         public ActivitiesPage() {
             InitializeComponent();
+            if(Device.OS == TargetPlatform.Windows ) {
+                displayMedicalDataButton.IsVisible = false;
+            }else if(Device.OS == TargetPlatform.Android ) {
+                editMedicalDataButton.IsVisible = false;
+            }
         }
 
         async private void OnLogoutButtonClicked( object sender, EventArgs e ) {
@@ -30,6 +35,10 @@ namespace TriageTagApplication
 
         async private void OnSynchronizeButtonClicked( object sender, EventArgs e ) {
             await Navigation.PushAsync( new SynchronizingPage() );
+        }
+
+        async private void OnDisplayMedicalDataButtonClicked( object sender, EventArgs e ) {
+            await Navigation.PushAsync( new DisplayMedicalDataPage() );
         }
     }
 }

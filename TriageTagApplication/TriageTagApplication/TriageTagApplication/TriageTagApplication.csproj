@@ -40,8 +40,8 @@
       <DependentUpon>ActivitiesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.cs" />
-    <Compile Include="ViewPages\DisplayMedicalDatapage.xaml.cs">
-      <DependentUpon>DisplayMedicalDatapage.xaml</DependentUpon>
+    <Compile Include="ViewPages\DisplayMedicalDataPage.xaml.cs">
+      <DependentUpon>DisplayMedicalDataPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewPages\EditMedicalDataPage.xaml.cs">
       <DependentUpon>EditMedicalDataPage.xaml</DependentUpon>
@@ -114,7 +114,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ViewPages\DisplayMedicalDatapage.xaml">
+    <EmbeddedResource Include="ViewPages\DisplayMedicalDataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
