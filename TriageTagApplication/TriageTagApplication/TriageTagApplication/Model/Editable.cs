@@ -19,8 +19,15 @@ namespace TriageTagApplication.Model
             }
             set {
                 if(isEditable != value ) {
-                    isEditable = value;   
+                    isEditable = value;
+                    OnPropertyChanged( "IsEditable" );
                 }
+            }
+        }
+
+        public void OnPropertyChanged(string propertyName ) {
+            if(PropertyChanged != null ) {
+                PropertyChanged( this, new PropertyChangedEventArgs( propertyName ) );
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-
+using TriageTagApplication.Model;
 using Xamarin.Forms;
 
 namespace TriageTagApplication
@@ -13,14 +13,15 @@ namespace TriageTagApplication
     {
         App app = Application.Current as App;
         MedicalHistory mhistory;
-
-        public bool canEdit { get; set; }
+        Editable editable;
 
         public EditMedicalDataPage() {
+            editable = new Editable() {
+                IsEditable = false
+            };
+
+           
             InitializeComponent();
-            canEdit = false;
-            this.BindingContext = this;
-            canEdit = false;
             makeGrid();
         }
 
@@ -38,8 +39,6 @@ namespace TriageTagApplication
             }
 
             Grid grid = new Grid();
-            grid.BindingContext = mhistory;
-            scrollView.BindingContext = this;
 
             //Create a row definition for each field
             for ( int i = 0; i < numberOfLables; i++ ) {
@@ -55,19 +54,22 @@ namespace TriageTagApplication
             int rownumber = 0;
             addGridRow( ref grid, "Allergies", "allergies", rownumber++ );
             addGridRow( ref grid, "Blood Type", "bloodType", rownumber++ );
-
+            addGridRow( ref grid, "Religion", "religion", rownumber++ );
+            addGridRow( ref grid, "High Blood Pressure", "highBloodPressure", rownumber++ );
+            addGridRow( ref grid, "Medications", "medications", rownumber++ );
+            addGridRow( ref grid, "Primary Doctor", "primaryDoctor", rownumber++ );
+      
             editButton.IsEnabled = true;
-
             scrollView.Content = grid;
         }
 
         // Places Lables and Entrys into grid
-        private void addGridRow(ref Grid grid, string labelText, string binding, int rownumber) {
+        private void addGridRow( ref Grid grid, string labelText, string binding, int rownumber ) {
             Color bgColor;
 
             if ( rownumber % 2 == 0 ) {
-                bgColor = Color.Gray;
-            }else {
+                bgColor = Color.Fuchsia;
+            } else {
                 bgColor = Color.Aqua;
             }
 
@@ -83,20 +85,28 @@ namespace TriageTagApplication
             //add entry to grid
             Entry entry = new Entry();
             entry.HorizontalTextAlignment = TextAlignment.Center;
-            entry.SetBinding( Entry.TextProperty, binding );
-            entry.SetBinding( Entry.IsEnabledProperty, "canEdit" );
+            entry.SetBinding( Entry.TextProperty, new Binding {
+                Source = mhistory,
+                Path = binding,
+                Mode = BindingMode.TwoWay
+            } );
+            entry.SetBinding( Entry.IsEnabledProperty, new Binding {
+                Source = editable,
+                Path = "IsEditable",
+                Mode = BindingMode.OneWay
+            } );
             Grid.SetRow( entry, rownumber );
             Grid.SetColumn( entry, 1 );
             grid.Children.Add( entry );
         }
 
-        private void OnSaveButtonClicked( object sender, EventArgs e ) {          
+        private void OnSaveButtonClicked( object sender, EventArgs e ) {
             app.dbConnection.Update( mhistory );
-            canEdit = false;  
+            editable.IsEditable = false;
         }
 
         private void OnEditButtonClicked( object sender, EventArgs e ) {
-            canEdit = true;
+            editable.IsEditable = true;
         }
 
         async private void OnbackButtonClicked( object sender, EventArgs e ) {
