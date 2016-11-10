@@ -33,7 +33,8 @@ namespace TriageTagApplication.Droid
 
             //This is an example of how one would might creat a connection to a database file
             string sqliteFilename = "database.db3";
-            string filePath = Path.Combine( System.Environment.CurrentDirectory, sqliteFilename ); // Documents folder
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
             
             //Create database file
             //if( !File.Exists( filePath ) ) {
