@@ -14,6 +14,8 @@ namespace TriageTagApplication
 
         public ActivitiesPage() {
             InitializeComponent();
+
+            // Display hide certain buttons depending on platfrom
             if(Device.OS == TargetPlatform.Windows ) {
                 displayMedicalDataButton.IsVisible = false;
             }else if(Device.OS == TargetPlatform.Android ) {
