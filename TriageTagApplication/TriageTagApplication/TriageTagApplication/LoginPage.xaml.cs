@@ -20,6 +20,11 @@ namespace TriageTagApplication
             InitializeComponent();
         }
 
+        /*
+         Check if the user has entered text into the fields 
+         if text is present: enable login button
+         else button is disabled.
+             */
         private void OnTextChanged( object sender, TextChangedEventArgs e ) {
            Entry entry = (Entry)sender;
 
