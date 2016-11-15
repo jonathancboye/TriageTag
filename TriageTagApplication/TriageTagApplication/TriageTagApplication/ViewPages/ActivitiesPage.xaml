@@ -35,6 +35,15 @@
                 FontSize="Large"
                 Font="Bold"
                 Clicked="OnSynchronizeButtonClicked"/>
+      
+      <Button x:Name="addUserButton"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand"
+               Text="Add New User"
+               FontSize="Large"
+               Font="Bold"
+               Clicked="OnaddUserButtonClicked"/>
+      
 
         <Button x:Name="logoutButton"
                 VerticalOptions="CenterAndExpand"

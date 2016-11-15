@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriageTagApplication.addUserPage">
+  <ContentPage.Content>
+    <WrapPanel Orientation="Horizontal">
+
+      <StackPanel Orientation="Horizontal">
+        <Label x:Name="fnmLbl"
+               Text="First"
+               TextColor="Black"
+               IsVisible="True" />
+
+        <Entry x:Name="fnmField"
+                 Text=""
+                 TextColor="Black"
+                 TextChanged="OnTextChanged"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal">
+        <Label x:Name="lnLbl"
+               Text="Last"
+               TextColor="Black"
+               IsVisible="True" />
+
+        <Entry x:Name="lnField"
+                 Text=""
+                 TextColor="Black"
+                 TextChanged="OnTextChanged"/>
+        
+      </StackPanel>
+    </WrapPanel>
+  </ContentPage.Content>
+</ContentPage>

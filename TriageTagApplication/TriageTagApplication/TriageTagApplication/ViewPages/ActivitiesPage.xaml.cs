@@ -21,12 +21,17 @@ namespace TriageTagApplication
                 displayMedicalDataButton.IsVisible = false;
             }else if(Device.OS == TargetPlatform.Android ) {
                 editMedicalDataButton.IsVisible = false;
-                synchronizeButton.IsVisible = false;
+                addUserButton.IsVisible = false;
             }
         }
 
         async private void OnLogoutButtonClicked( object sender, EventArgs e ) {
             await Navigation.PopAsync();
+        }
+
+        async private void OnaddUserButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ScanPage());
         }
 
         async private void OnScanTagButtonClicked( object sender, EventArgs e ) {

@@ -64,6 +64,7 @@ namespace TriageTagApplication
             if ( users.Count == 1 ) {
                 // Set UID so we know which user logged
                 app.UID = users[0].employeeId;
+                app.uLvl = users[0].userLvl;
                 await Navigation.PushAsync( new ActivitiesPage() );
             } else {
                 invalidText.IsVisible = true;
