@@ -35,12 +35,11 @@ namespace TriageTagApplication.Droid
             string sqliteFilename = "database.db3";
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
-            
             //Create database file
             //if( !File.Exists( filePath ) ) {
             //    fs = File.Open( filePath );
             //}else {
-                fs = File.Create( filePath );
+            fs = File.Create( filePath );
             //}
 
             fs.Close();

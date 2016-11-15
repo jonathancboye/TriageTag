@@ -11,6 +11,7 @@ namespace TriageTagApplication
     public partial class ActivitiesPage : ContentPage
     {
         App application = Application.Current as App;
+        public bool syncComplete = false;
 
         public ActivitiesPage() {
             InitializeComponent();
@@ -20,6 +21,7 @@ namespace TriageTagApplication
                 displayMedicalDataButton.IsVisible = false;
             }else if(Device.OS == TargetPlatform.Android ) {
                 editMedicalDataButton.IsVisible = false;
+                synchronizeButton.IsVisible = false;
             }
         }
 

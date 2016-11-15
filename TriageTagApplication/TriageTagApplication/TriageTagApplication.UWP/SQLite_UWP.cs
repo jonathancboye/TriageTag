@@ -28,7 +28,6 @@ namespace TriageTagApplication.UWP
 
             //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path);
-
             System.Diagnostics.Debug.WriteLine( databaseFile.Path );
             return connection;
         }

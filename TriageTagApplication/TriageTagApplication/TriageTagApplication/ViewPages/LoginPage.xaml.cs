@@ -48,10 +48,9 @@ namespace TriageTagApplication
         async private void makeConnection() {
             // Connect to database file
             app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
-
+            
             // Create test database
             TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
-
             connectionMade = true;
 
             validate();
@@ -73,6 +72,7 @@ namespace TriageTagApplication
             // Clear text fields
             username.Text = "";
             password.Text = "";
+           
         }
     }
 }
