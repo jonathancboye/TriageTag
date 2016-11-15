@@ -16,8 +16,8 @@ namespace TriageTagApplication
             InitializeComponent();
         }
 
-        private void OnCancelButtonClicked( object sender, EventArgs e ) {
-            application.MainPage = application.activitiesPage;
+        async private void OnCancelButtonClicked( object sender, EventArgs e ) {
+            await Navigation.PopAsync();
         }
     }
 }

@@ -10,6 +10,7 @@ namespace TriageTagApplication
 {
     public interface ISQLite
     {
+        // Returns: SQLiteConnection from a database file
         Task<SQLiteConnection> getConnection();
     }
 }

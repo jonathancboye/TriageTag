@@ -13,10 +13,10 @@ namespace TriageTagApplication
         public int Id { get; set; }
         [Indexed]
         public int employeeId { get; set; }
-        public string Allergies { get; set; }
+        public string allergies { get; set; }
         public string bloodType { get; set; }
         public string religion { get; set; }
-        public bool highBloodPressure { get; set; }
+        public string highBloodPressure { get; set; }
         public string medications { get; set; }
         public string primaryDoctor { get; set; }
     }

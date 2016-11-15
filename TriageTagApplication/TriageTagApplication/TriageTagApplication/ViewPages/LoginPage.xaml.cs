@@ -14,6 +14,7 @@ namespace TriageTagApplication
     public partial class LoginPage : ContentPage
     {
         App app = Application.Current as App;
+        bool connectionMade = false;
 
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
@@ -26,26 +27,52 @@ namespace TriageTagApplication
          else button is disabled.
              */
         private void OnTextChanged( object sender, TextChangedEventArgs e ) {
-           Entry entry = (Entry)sender;
+            Entry entry = (Entry)sender;
 
-           if(username.Text != "" && password.Text != "" ) {
+            if ( username.Text != "" && password.Text != "" ) {
                 loginButton.IsEnabled = true;
-            }
-            else {
+            } else {
                 loginButton.IsEnabled = false;
             }
-
         }
 
-        async private void OnButtonClicked( object sender, EventArgs e ) {
-            app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
-            TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
-            List<Users> users = app.dbConnection.Query<Users>( "SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
-            if(users.Count == 1 ) {
-                app.UID = users[0].employeeId;
-                app.MainPage = app.activitiesPage;
+        private void OnButtonClicked( object sender, EventArgs e ) {
+
+            if ( !connectionMade ) {
+                makeConnection();
+            } else {
+                validate();
             }
+        }
+
+        async private void makeConnection() {
+            // Connect to database file
+            app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
+
+            // Create test database
+            TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
+
+            connectionMade = true;
+
+            validate();
+
+           
+        }
+
+        async private void validate() {
+            // Query database for user
+            List<Users> users = app.dbConnection.Query<Users>( "SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
+            if ( users.Count == 1 ) {
+                // Set UID so we know which user logged
+                app.UID = users[0].employeeId;
+                await Navigation.PushAsync( new ActivitiesPage() );
+            } else {
+                invalidText.IsVisible = true;
+            }
+
+            // Clear text fields
+            username.Text = "";
+            password.Text = "";
         }
     }
 }
- 
