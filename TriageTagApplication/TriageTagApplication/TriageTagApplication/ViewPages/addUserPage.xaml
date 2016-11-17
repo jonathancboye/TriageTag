@@ -1,34 +1,183 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage x:Name ="thePage" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TriageTagApplication.addUserPage">
-  <ContentPage.Content>
-    <WrapPanel Orientation="Horizontal">
+             x:Class="TriageTagApplication.addUserPage" Title="TriageTag New User">
 
-      <StackPanel Orientation="Horizontal">
-        <Label x:Name="fnmLbl"
-               Text="First"
-               TextColor="Black"
-               IsVisible="True" />
+  <StackLayout VerticalOptions ="Fill" HorizontalOptions="Fill" Spacing="20"  BackgroundColor ="Gray">
 
-        <Entry x:Name="fnmField"
-                 Text=""
-                 TextColor="Black"
-                 TextChanged="OnTextChanged"/>
-      </StackPanel>
+    <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="Fill" Spacing="10" Margin ="70,50,0,0">
+      <Label x:Name="fnmLbl">
+        <Label.Text>First Name</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
 
-      <StackPanel Orientation="Horizontal">
-        <Label x:Name="lnLbl"
-               Text="Last"
-               TextColor="Black"
-               IsVisible="True" />
+      <Entry x:Name="fnmField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter First Name</Entry.Placeholder>
+      </Entry>
 
-        <Entry x:Name="lnField"
-                 Text=""
-                 TextColor="Black"
-                 TextChanged="OnTextChanged"/>
-        
-      </StackPanel>
-    </WrapPanel>
-  </ContentPage.Content>
+      <Label x:Name="firstError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+  </StackLayout>
+
+    <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="lnLbl">
+        <Label.Text>Last Name</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="lnField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Last Name</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="lastError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+    
+    <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="addressLbl">
+        <Label.Text>Address</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="addressField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Your Address</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="addressError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="phoneLbl">
+        <Label.Text>Phone Number</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="phoneField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Phone number</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="phoneError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="emergLbl">
+        <Label.Text>Emergency Contact</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="emergField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Contact Number</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="emergError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="userLbl">
+        <Label.Text>Username</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="userField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Your Username</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="userError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="passLbl">
+        <Label.Text>Password</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="passField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter Your Password</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="passError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="ulvlLbl">
+        <Label.Text>User Access Lvl.</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="ulvlField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Standard = 1 Admin = 2</Entry.Placeholder>
+      </Entry>
+
+      <Label x:Name="lvlError">
+        <Label.Text>Field Empty</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+    </StackLayout>
+
+  <StackLayout HorizontalOptions="End">
+    <Button x:Name = "saveButton" Margin ="0,200,100,0" WidthRequest="120" FontAttributes ="Bold" Clicked ="OnSaveButtonClicked" >
+
+      <Button.Text>Save</Button.Text>
+      <Button.FontSize>16</Button.FontSize>
+      <Button.BorderWidth>3</Button.BorderWidth>
+      <Button.BorderColor>Black</Button.BorderColor>
+      <Button.BackgroundColor>Red</Button.BackgroundColor>
+      <Button.FontFamily>Gothic</Button.FontFamily>
+
+      </Button>
+
+  </StackLayout>
+
+  </StackLayout> 
 </ContentPage>

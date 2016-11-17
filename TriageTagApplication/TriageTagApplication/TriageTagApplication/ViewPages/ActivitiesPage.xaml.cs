@@ -13,6 +13,7 @@ namespace TriageTagApplication
         App application = Application.Current as App;
         public bool syncComplete = false;
 
+
         public ActivitiesPage() {
             InitializeComponent();
 
@@ -31,7 +32,8 @@ namespace TriageTagApplication
 
         async private void OnaddUserButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ScanPage());
+           
+            await Navigation.PushAsync(new addUserPage());
         }
 
         async private void OnScanTagButtonClicked( object sender, EventArgs e ) {
