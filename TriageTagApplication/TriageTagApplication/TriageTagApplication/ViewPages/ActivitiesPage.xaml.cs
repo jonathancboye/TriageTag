@@ -19,7 +19,7 @@ namespace TriageTagApplication
 
             // Hide certain buttons depending on platfrom
             if(Device.OS == TargetPlatform.Windows ) {
-                displayMedicalDataButton.IsVisible = false;
+
             }else if(Device.OS == TargetPlatform.Android ) {
                 editMedicalDataButton.IsVisible = false;
                 addUserButton.IsVisible = false;
@@ -46,10 +46,6 @@ namespace TriageTagApplication
 
         async private void OnSynchronizeButtonClicked( object sender, EventArgs e ) {
             await Navigation.PushAsync( new SynchronizingPage() );
-        }
-
-        async private void OnDisplayMedicalDataButtonClicked( object sender, EventArgs e ) {
-            await Navigation.PushAsync( new DisplayMedicalDataPage() );
         }
     }
 }

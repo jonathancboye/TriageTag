@@ -12,18 +12,18 @@ namespace TriageTagApplication
     {
         App app = Application.Current as App;
         MedicalHistory mhistory;
+        string _employeeId;
 
-        public DisplayMedicalDataPage() {
+        public DisplayMedicalDataPage(string employeeId) {
+            _employeeId = employeeId;
             InitializeComponent();
             makeGrid();
         }
         private void makeGrid() {
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
-            // TODO: Query medical history for Scanned NFC Tag
-
             // get test data
-            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID );
+            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", _employeeId );
             if ( mhistorys.Count > 0 ) {
                 mhistory = mhistorys[0];
             } else {
