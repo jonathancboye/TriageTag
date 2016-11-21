@@ -24,7 +24,7 @@ namespace TriageTagApplication.UWP
 
             //Create database file
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile databaseFile = await localFolder.CreateFileAsync("database.db3", CreationCollisionOption.ReplaceExisting);
+            StorageFile databaseFile = await localFolder.CreateFileAsync("database.db3", CreationCollisionOption.OpenIfExists);
 
             //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path);

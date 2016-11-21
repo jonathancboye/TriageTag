@@ -14,32 +14,13 @@ namespace TriageTagApplication
 
         App app = Application.Current as App;
 
-        private int emId;
-        private string defaultFirst;
-        private string defaultLast;
-        private string defaultAddress;
-        private string defaultPhone;
-        private string defaultEmerg;
-        private string defaultUName;
-        private string defaultPass;
-        private string defaultLvl;
+        private byte[] emId;
+        
 
         public addUserPage()
         {
             InitializeComponent();
 
-        }
-
-        private void setPlaceholders()
-        {
-            defaultFirst = fnmField.Text;
-            defaultLast = lnField.Text;
-            defaultAddress = addressField.Text;
-            defaultPhone = phoneField.Text;
-            defaultEmerg = emergField.Text;
-            defaultUName = userField.Text;
-            defaultPass = passField.Text;
-            defaultLvl = ulvlField.Text;
         }
 
         async private void goBack()
@@ -51,32 +32,33 @@ namespace TriageTagApplication
 
         private void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            setPlaceholders();
+            
             if (formComplete())
             {
 
                 if (checkUserName() && checkUserLvl() )
                 {
 
-                    emId = new Random().Next(1, 1000);
+                    
+                    emId = Crypto.EncryptAes(new Random().Next(1, 1000).ToString(), passField.Text, app.salt);
                     app.dbConnection.Insert(new Users
                     {
                         employeeId = emId,
-                        username = userField.Text,
-                        password = passField.Text,
-                        userLvl = Int32.Parse(ulvlField.Text)
-
+                        username = Crypto.EncryptAes(userField.Text, passField.Text, app.salt),
+                        password = Crypto.EncryptAes(passField.Text, passField.Text, app.salt),
+                        userLvl = Crypto.EncryptAes(ulvlField.Text, passField.Text, app.salt)
                     });
+
+
 
                     app.dbConnection.Insert(new Employee
                     {
                         employeeId = emId,
-                        address = addressField.Text,
-                        phonenumber = phoneField.Text,
-                        emergencyContact = emergField.Text,
-                        firstname = fnmField.Text,
-                        lastname = lnField.Text
-
+                        address = Crypto.EncryptAes(addressField.Text, passField.Text, app.salt),
+                        phonenumber = Crypto.EncryptAes(phoneField.Text, passField.Text, app.salt),
+                        emergencyContact = Crypto.EncryptAes(emergField.Text, passField.Text, app.salt),
+                        firstname = Crypto.EncryptAes(fnmField.Text, passField.Text, app.salt),
+                        lastname = Crypto.EncryptAes(lnField.Text, passField.Text, app.salt)
                     });
 
                     errorReset();
@@ -84,8 +66,6 @@ namespace TriageTagApplication
                     DisplayAlert("User added", "User" + fnmField.Text + " " + lnField.Text + " was succesfully added.", "OK");
                     goBack();
                 }
-
-                
 
             }
 
@@ -119,8 +99,16 @@ namespace TriageTagApplication
         private Boolean checkUserName()
         {
             Boolean valid = true;
+            String uName = "";
 
-            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=?", userField.Text);
+            List<Users> users = app.dbConnection.Query<Users>("SELECT username FROM Users");
+
+            foreach(Users name in users)
+            {
+                uName = Crypto.DecryptAes(name.username,)
+
+            }
+            
 
             if(users.Count > 0)
             {

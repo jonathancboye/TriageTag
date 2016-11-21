@@ -19,6 +19,13 @@ namespace TriageTagApplication
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
             InitializeComponent();
+            
+        }
+
+        private void intializeSalt()
+        {
+            List<Salt> salts = app.dbConnection.Query<Salt>("SELECT * FROM Salt WHERE Id = 1");
+            app.salt = salts[0].key;
         }
 
         /*
@@ -37,7 +44,7 @@ namespace TriageTagApplication
         }
 
         private void OnButtonClicked( object sender, EventArgs e ) {
-
+           
             if ( !connectionMade ) {
                 makeConnection();
             } else {
@@ -50,21 +57,17 @@ namespace TriageTagApplication
             app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
             
             // Create test database
-            TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
+            //TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
             connectionMade = true;
 
-            validate();
-
-           
+            validate(); 
         }
 
         async private void validate() {
-            // Query database for user
-            List<Users> users = app.dbConnection.Query<Users>( "SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
-            if ( users.Count == 1 ) {
-                // Set UID so we know which user logged
-                app.UID = users[0].employeeId;
-                app.uLvl = users[0].userLvl;
+
+            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
+            intializeSalt();
+            if ( users.Count == 1 || checkUserPassword()) {
                 await Navigation.PushAsync( new ActivitiesPage() );
             } else {
                 invalidText.IsVisible = true;
@@ -75,5 +78,43 @@ namespace TriageTagApplication
             password.Text = "";
            
         }
+
+        private Boolean checkUserPassword()
+        {
+            Boolean valid = false;
+            String uName = BitConverter.ToString(Crypto.EncryptAes(username.Text,password.Text,app.salt));
+            String pValue = BitConverter.ToString(Crypto.EncryptAes(password.Text, password.Text, app.salt));
+            //List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
+            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users");
+
+            foreach(Users name in users){
+                String valUser = "";
+                String valPass = "";
+                try
+                {
+                    valUser = Crypto.DecryptAes(name.username, password.Text, app.salt);
+                    valPass = Crypto.DecryptAes(name.password, password.Text, app.salt);
+
+                }catch { continue; }
+
+                if(valUser == username.Text && valPass == password.Text)
+                {
+                    app.UID = name.employeeId;
+                    app.uLvl = name.userLvl;
+                    valid = true;
+                    break;
+                }
+            }
+
+            if (users.Count == 1)
+            {
+                valid = true;
+
+            }
+
+            return valid;
+        }
+
+
     }
 }

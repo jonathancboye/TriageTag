@@ -17,7 +17,7 @@ using SQLite.Net.Interop;
 using TriageTagApplication.Droid;
 using Xamarin.Forms;
 using Xamarin.Android;
-
+#pragma warning disable CS1998 
 [assembly: Dependency ( typeof( SQLite_Android ) )]
 namespace TriageTagApplication.Droid
 {
