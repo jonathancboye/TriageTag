@@ -20,14 +20,6 @@
                 Font="Bold"
                 Clicked="OnEditMedicalDataButtonClicked"/>
 
-        <Button x:Name="displayMedicalDataButton"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
-                Text="Display Medical Data"
-                FontSize="Large"
-                Font="Bold"
-                Clicked="OnDisplayMedicalDataButtonClicked" />
-
         <Button x:Name="synchronizeButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"

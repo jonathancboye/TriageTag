@@ -10,7 +10,7 @@ namespace TriageTagApplication
 {
     public partial class ScanPage : ContentPage
     {
-        App application = Application.Current as App;
+        App app = Application.Current as App;
         public Button readButton;
         public Button writeButton;
         private Entry entry;
@@ -51,6 +51,11 @@ namespace TriageTagApplication
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             };
 
+            // Only Administrators can write to tags
+            if(app.uLvl != 2 ) {
+                writeButton.IsVisible = false;
+            }
+
             layout.Children.Add( label );
             layout.Children.Add( readButton );
             layout.Children.Add( entry );
@@ -66,8 +71,8 @@ namespace TriageTagApplication
             System.Diagnostics.Debug.WriteLine( message );
         }
 
-        public void OnReadButtonClicked( string message ) {
-            label.Text = message;
+        async public void OnReadButtonClicked( string employeeId ) {
+            await Navigation.PushAsync( new DisplayMedicalDataPage(employeeId));
         }
 
         public string getMessageToWrite() {
