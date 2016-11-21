@@ -18,12 +18,6 @@ namespace TriageTagApplication
         public ScanPage() {
             InitializeComponent();
 
-            label = new Label {
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Text = "Read a Tag"
-            };
-
             readButton = new Button {
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
@@ -43,22 +37,12 @@ namespace TriageTagApplication
             };
             cancelButton.Clicked += OnCancelButtonClicked;
 
-            entry = new Entry {
-                IsEnabled = true,
-                IsVisible = true,
-                Placeholder = "Message to write",
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                HorizontalOptions = LayoutOptions.CenterAndExpand
-            };
-
             // Only Administrators can write to tags
             if(app.uLvl != 2 ) {
                 writeButton.IsVisible = false;
             }
 
-            layout.Children.Add( label );
             layout.Children.Add( readButton );
-            layout.Children.Add( entry );
             layout.Children.Add( writeButton );
             layout.Children.Add( cancelButton );
         }
