@@ -27,9 +27,9 @@ namespace TriageTagApplication.Droid
             LoadApplication( new App() );
         }
 
-       public void startActivity(Intent intent, Action<int, Result, Intent> resultCallback, int resultCode ) {
+       public void startActivity(Type typeofActivity, Action<int, Result, Intent> resultCallback, int resultCode ) {
             _resultCallback = resultCallback;
-            StartActivityForResult( intent, resultCode );
+            StartActivityForResult( typeofActivity, resultCode );
         }
 
        protected override void OnActivityResult( int requestCode, Result resultCode, Intent data ) {

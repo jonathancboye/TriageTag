@@ -2344,6 +2344,9 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f07005c
 			public const int edit_query = 2131165276;
 			
+			// aapt resource value: 0x7f07009c
+			public const int employeeId = 2131165340;
+			
 			// aapt resource value: 0x7f07001c
 			public const int end = 2131165212;
 			
@@ -2527,6 +2530,9 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f070054
 			public const int radio = 2131165268;
 			
+			// aapt resource value: 0x7f070099
+			public const int readButton = 2131165337;
+			
 			// aapt resource value: 0x7f070030
 			public const int right = 2131165232;
 			
@@ -2593,8 +2599,8 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f070013
 			public const int showTitle = 2131165203;
 			
-			// aapt resource value: 0x7f070098
-			public const int sliding_tabs = 2131165336;
+			// aapt resource value: 0x7f07009a
+			public const int sliding_tabs = 2131165338;
 			
 			// aapt resource value: 0x7f07006c
 			public const int snackbar_action = 2131165292;
@@ -2623,6 +2629,9 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f070031
 			public const int start = 2131165233;
 			
+			// aapt resource value: 0x7f070098
+			public const int statusText = 2131165336;
+			
 			// aapt resource value: 0x7f07008d
 			public const int status_bar_latest_event_content = 2131165325;
 			
@@ -2650,8 +2659,8 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f070048
 			public const int title_template = 2131165256;
 			
-			// aapt resource value: 0x7f070099
-			public const int toolbar = 2131165337;
+			// aapt resource value: 0x7f07009b
+			public const int toolbar = 2131165339;
 			
 			// aapt resource value: 0x7f070032
 			public const int top = 2131165234;
@@ -2679,6 +2688,9 @@ namespace TriageTagApplication.Droid
 			
 			// aapt resource value: 0x7f070015
 			public const int wrap_content = 2131165205;
+			
+			// aapt resource value: 0x7f07009d
+			public const int writeButton = 2131165341;
 			
 			static Id()
 			{
@@ -2909,22 +2921,28 @@ namespace TriageTagApplication.Droid
 			public const int notification_template_part_time = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int select_dialog_item_material = 2130903091;
+			public const int ReaderActivity = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public const int select_dialog_multichoice_material = 2130903092;
+			public const int select_dialog_item_material = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public const int select_dialog_singlechoice_material = 2130903093;
+			public const int select_dialog_multichoice_material = 2130903093;
 			
 			// aapt resource value: 0x7f030036
-			public const int support_simple_spinner_dropdown_item = 2130903094;
+			public const int select_dialog_singlechoice_material = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int Tabbar = 2130903095;
+			public const int support_simple_spinner_dropdown_item = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int Toolbar = 2130903096;
+			public const int Tabbar = 2130903096;
+			
+			// aapt resource value: 0x7f030039
+			public const int Toolbar = 2130903097;
+			
+			// aapt resource value: 0x7f03003a
+			public const int WriterActivity = 2130903098;
 			
 			static Layout()
 			{

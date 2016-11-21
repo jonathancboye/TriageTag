@@ -37,16 +37,13 @@ namespace TriageTagApplication.Droid
 
         private void OnReadButtonClicked( object sender, EventArgs e ) {
             var mainActivity = this.Context as MainActivity;
-            Intent intent = new Intent(mainActivity, typeof(ReadActivity));
-            mainActivity.startActivity( intent, OnActivityResult, MainActivity.NFC_READ );
+            mainActivity.startActivity( typeof(ReadActivity), OnActivityResult, MainActivity.NFC_READ );
         }
 
         private void OnWriteButtonClicked( object sender, EventArgs e ) {
             var mainActivity = this.Context as MainActivity;
             var scanPage = this.Element as ScanPage;
-            Intent intent = new Intent(mainActivity, typeof(WriteActivity));
-            intent.PutExtra( "message", scanPage.getMessageToWrite() );
-            mainActivity.startActivity( intent, OnActivityResult, MainActivity.NFC_WRITE );
+            mainActivity.startActivity( typeof( WriteActivity ), OnActivityResult, MainActivity.NFC_WRITE );
         }
 
         private void OnActivityResult( int requestCode, Result resultCode, Intent data ) {
