@@ -165,6 +165,50 @@
       </Label>
     </StackLayout>
 
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="Fill" Spacing="10" Margin ="70,0,0,0">
+      <Label x:Name="emLbl">
+        <Label.Text>Employee ID</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="emField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35" IsEnabled="False">
+        <Entry.Placeholder>Press generate button</Entry.Placeholder>
+      </Entry>
+
+      <Button x:Name = "genEm"  WidthRequest="90" FontAttributes ="Bold" Clicked ="OngenEmClicked" >
+
+        <Button.Text>Generate</Button.Text>
+        <Button.FontSize>16</Button.FontSize>
+        <Button.BorderWidth>3</Button.BorderWidth>
+        <Button.BorderColor>Black</Button.BorderColor>
+        <Button.BackgroundColor>Blue</Button.BackgroundColor>
+        <Button.FontFamily>Gothic</Button.FontFamily>
+
+      </Button>
+
+      <Button x:Name = "writeEm" WidthRequest="90" FontAttributes ="Bold" Clicked ="OnwriteEmClicked" IsVisible="False" >
+
+        <Button.Text>Write</Button.Text>
+        <Button.FontSize>16</Button.FontSize>
+        <Button.BorderWidth>3</Button.BorderWidth>
+        <Button.BorderColor>Black</Button.BorderColor>
+        <Button.BackgroundColor>Green</Button.BackgroundColor>
+        <Button.FontFamily>Gothic</Button.FontFamily>
+
+      </Button>
+
+      <Label x:Name="emError">
+        <Label.Text>Complete Form</Label.Text>
+        <Label.WidthRequest>200</Label.WidthRequest>
+        <Label.FontSize>14</Label.FontSize>
+        <Label.IsVisible>false</Label.IsVisible>
+        <Label.TextColor>Red</Label.TextColor>
+      </Label>
+
+      
+    </StackLayout>
+
   <StackLayout HorizontalOptions="End">
     <Button x:Name = "saveButton" Margin ="0,200,100,0" WidthRequest="120" FontAttributes ="Bold" Clicked ="OnSaveButtonClicked" >
 

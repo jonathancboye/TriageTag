@@ -29,6 +29,28 @@ namespace TriageTagApplication
             await Navigation.PopAsync();
         }
 
+        private void OngenEmClicked(object sender, EventArgs E)
+        {
+
+            if (formComplete())
+            {
+                string tempEmID = fnmField.Text + lnField.Text + new Random().Next(1, 1000).ToString();
+                emError.IsVisible = false;
+                emId = Crypto.EncryptAes(tempEmID, App.pkey, app.salt);
+                emField.Text = tempEmID;
+                writeEm.IsVisible = true;
+
+            }
+            else { emError.IsVisible = true; writeEm.IsVisible = false; }
+
+        }
+        //write the emID to the tag as employeeID
+        private void OnwriteEmClicked(object sender, EventArgs E)
+        {
+
+        }
+
+
 
         private void OnSaveButtonClicked(object sender, EventArgs e)
         {
@@ -39,14 +61,12 @@ namespace TriageTagApplication
                 if (checkUserName() && checkUserLvl() )
                 {
 
-                    
-                    emId = Crypto.EncryptAes(new Random().Next(1, 1000).ToString(), passField.Text, app.salt);
                     app.dbConnection.Insert(new Users
                     {
                         employeeId = emId,
-                        username = Crypto.EncryptAes(userField.Text, passField.Text, app.salt),
-                        password = Crypto.EncryptAes(passField.Text, passField.Text, app.salt),
-                        userLvl = Crypto.EncryptAes(ulvlField.Text, passField.Text, app.salt)
+                        username = Crypto.EncryptAes(userField.Text, App.pkey, app.salt),
+                        password = Crypto.EncryptAes(passField.Text, App.pkey, app.salt),
+                        userLvl = Crypto.EncryptAes(ulvlField.Text, App.pkey, app.salt)
                     });
 
 
@@ -54,11 +74,11 @@ namespace TriageTagApplication
                     app.dbConnection.Insert(new Employee
                     {
                         employeeId = emId,
-                        address = Crypto.EncryptAes(addressField.Text, passField.Text, app.salt),
-                        phonenumber = Crypto.EncryptAes(phoneField.Text, passField.Text, app.salt),
-                        emergencyContact = Crypto.EncryptAes(emergField.Text, passField.Text, app.salt),
-                        firstname = Crypto.EncryptAes(fnmField.Text, passField.Text, app.salt),
-                        lastname = Crypto.EncryptAes(lnField.Text, passField.Text, app.salt)
+                        address = Crypto.EncryptAes(addressField.Text, App.pkey, app.salt),
+                        phonenumber = Crypto.EncryptAes(phoneField.Text, App.pkey, app.salt),
+                        emergencyContact = Crypto.EncryptAes(emergField.Text, App.pkey, app.salt),
+                        firstname = Crypto.EncryptAes(fnmField.Text, App.pkey, app.salt),
+                        lastname = Crypto.EncryptAes(lnField.Text, App.pkey, app.salt)
                     });
 
                     errorReset();
@@ -95,7 +115,7 @@ namespace TriageTagApplication
             return valid;
 
         }
-
+        /*Ensure username isn't already in use. */
         private Boolean checkUserName()
         {
             Boolean valid = true;
@@ -105,16 +125,14 @@ namespace TriageTagApplication
 
             foreach(Users name in users)
             {
-                //uName = Crypto.DecryptAes(name.username,)
 
-            }
-            
+                try
+                {
+                    uName = Crypto.DecryptAes(name.username, App.pkey, app.salt);
 
-            if(users.Count > 0)
-            {
-                valid = false;
-                userError.IsVisible = true;
-                userError.Text = "User name unavailable";
+                    if(uName == userField.Text) { valid = false;userError.IsVisible = true; userError.Text = "Username already in use.";  break; }
+                }catch { continue; }
+
             }
 
             return valid;
@@ -196,6 +214,7 @@ namespace TriageTagApplication
             passError.IsVisible = false;
             lvlError.IsVisible = false;
             lvlError.Text = "Field Empty";
+            emError.IsVisible = false;
         }
 
         private void clearFields()
@@ -208,7 +227,8 @@ namespace TriageTagApplication
             userField.Text = "";
             passField.Text = "";
             ulvlField.Text = "";
-
+            writeEm.IsVisible = false;
+            emField.Text = "";
         }
 
     }

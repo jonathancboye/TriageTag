@@ -22,6 +22,7 @@ namespace TriageTagApplication
             
         }
 
+       
         private void intializeSalt()
         {
             List<Salt> salts = app.dbConnection.Query<Salt>("SELECT * FROM Salt WHERE Id = 1");
@@ -82,29 +83,10 @@ namespace TriageTagApplication
         private Boolean checkUserPassword()
         {
             Boolean valid = false;
-            String uName = BitConverter.ToString(Crypto.EncryptAes(username.Text,password.Text,app.salt));
-            String pValue = BitConverter.ToString(Crypto.EncryptAes(password.Text, password.Text, app.salt));
-            //List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
-            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users");
-
-            foreach(Users name in users){
-                String valUser = "";
-                String valPass = "";
-                try
-                {
-                    valUser = Crypto.DecryptAes(name.username, password.Text, app.salt);
-                    valPass = Crypto.DecryptAes(name.password, password.Text, app.salt);
-
-                }catch { continue; }
-
-                if(valUser == username.Text && valPass == password.Text)
-                {
-                    app.UID = name.employeeId;
-                    app.uLvl = name.userLvl;
-                    valid = true;
-                    break;
-                }
-            }
+            byte[] uName = Crypto.EncryptAes(username.Text,App.pkey,app.salt);
+            byte[] pValue = Crypto.EncryptAes(password.Text, App.pkey, app.salt);
+            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", uName, pValue);
+           
 
             if (users.Count == 1)
             {
