@@ -13,6 +13,7 @@ namespace TriageTagApplication
         public SQLiteConnection dbConnection; // Database Connection
         public byte[] UID; // Current logged in user
         public byte[] uLvl;
+        public const String pkey = "btggX!AFnvAOEe7P";
 
         public byte[] salt;
 
