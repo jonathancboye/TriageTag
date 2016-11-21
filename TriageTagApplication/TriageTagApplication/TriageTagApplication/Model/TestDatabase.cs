@@ -24,8 +24,8 @@ namespace TriageTagApplication
              admin should have the ability to add new users and other features.*/
             connection.Insert( new Users {
                 employeeId = 1,
-                username = "Jonathan",
-                password = "Carpenter",
+                username = "j",
+                password = "j",
                 userLvl = 2
             } );
 
