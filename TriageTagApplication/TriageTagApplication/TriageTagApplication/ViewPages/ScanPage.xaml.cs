@@ -13,8 +13,7 @@ namespace TriageTagApplication
         App app = Application.Current as App;
         public Button readButton;
         public Button writeButton;
-        private Entry entry;
-        private Label label;
+
         public ScanPage() {
             InitializeComponent();
 
@@ -57,10 +56,6 @@ namespace TriageTagApplication
 
         async public void OnReadButtonClicked( string employeeId ) {
             await Navigation.PushAsync( new DisplayMedicalDataPage(employeeId));
-        }
-
-        public string getMessageToWrite() {
-            return entry.Text;
         }
     }
 }

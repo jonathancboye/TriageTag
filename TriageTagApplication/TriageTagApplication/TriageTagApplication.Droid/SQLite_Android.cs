@@ -31,7 +31,7 @@ namespace TriageTagApplication.Droid
 
             FileStream fs;
 
-            //This is an example of how one would might creat a connection to a database file
+            //This is an example of how one might creat a connection to a database file
             string sqliteFilename = "database.db3";
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder

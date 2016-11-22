@@ -9,6 +9,13 @@
                Text="Status Text"
                Opacity=".50" />
 
+        <Button x:Name="syncButton"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="Sync"
+                Font="Bold"
+                Clicked="OnSyncButtonClicked" />
+        
         <Button x:Name="cancelButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"

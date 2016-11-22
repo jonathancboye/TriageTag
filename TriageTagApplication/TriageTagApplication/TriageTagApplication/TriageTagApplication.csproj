@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Model\Editable.cs" />
+    <Compile Include="Model\IFtpRequest.cs" />
     <Compile Include="ViewPages\ActivitiesPage.xaml.cs">
       <DependentUpon>ActivitiesPage.xaml</DependentUpon>
     </Compile>

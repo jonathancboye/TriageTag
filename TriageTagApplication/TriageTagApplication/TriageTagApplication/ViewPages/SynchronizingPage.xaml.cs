@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,10 @@ namespace TriageTagApplication
 
         async private void OnCancelButtonClicked( object sender, EventArgs e ) {
             await Navigation.PopAsync();
+        }
+
+        private void OnSyncButtonClicked( object sender, EventArgs e ) {
+            DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://192.168.1.101:20201/database.db3", "Triage", "1234" );
         }
     }
 }
