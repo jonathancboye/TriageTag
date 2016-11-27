@@ -18,6 +18,11 @@ namespace TriageTagApplication
         public byte[] salt;
 
         public App() {
+
+            if ( Device.OS == TargetPlatform.Android ) {
+                DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/database.db3", "Triage", "1234" );
+            }
+
             MainPage = new NavigationPage(new LoginPage());
         }
 
