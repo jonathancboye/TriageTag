@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriageTagApplication", "TriageTagApplication\TriageTagApplication\TriageTagApplication.csproj", "{F99BED3E-DCCD-416E-91F9-D2FF4ECB24B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriageTagApplication.Droid", "TriageTagApplication\TriageTagApplication.Droid\TriageTagApplication.Droid.csproj", "{5392AB56-75AF-4D68-B4A5-7513D1F1BCB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{88508EC4-6D70-45C2-BF5A-FCAE94601B10} = {88508EC4-6D70-45C2-BF5A-FCAE94601B10}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TriageTagApplication.UWP", "TriageTagApplication\TriageTagApplication.UWP\TriageTagApplication.UWP.csproj", "{88508EC4-6D70-45C2-BF5A-FCAE94601B10}"
 EndProject

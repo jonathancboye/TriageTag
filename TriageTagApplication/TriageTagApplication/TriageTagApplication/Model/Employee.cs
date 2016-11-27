@@ -12,11 +12,11 @@ namespace TriageTagApplication
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
-        public int employeeId { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
-        public string address { get; set; }
-        public string phonenumber { get; set; }
-        public string emergencyContact { get; set; }
+        public byte[] employeeId { get; set; }
+        public byte[] firstname { get; set; }
+        public byte[] lastname { get; set; }
+        public byte[] address { get; set; }
+        public byte[] phonenumber { get; set; }
+        public byte[] emergencyContact { get; set; }
     }
 }

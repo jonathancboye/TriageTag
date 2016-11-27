@@ -7,13 +7,12 @@ using SQLite.Net.Attributes;
 
 namespace TriageTagApplication
 {
-    class Users {
+    class Salt
+    {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
-        public byte[] employeeId { get; set; }
-        public byte[] username { get; set; }
-        public byte[] password { get; set; }
-        public byte[] userLvl { get; set; }
+        public byte[] key { get; set; }
+        
     }
 }
