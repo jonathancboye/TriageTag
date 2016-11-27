@@ -15,6 +15,8 @@ namespace TriageTagApplication.UWP
 {
     class SQLite_UWP: ISQLite
     {
+        // TODO: Grab database file from ftp server
+
         //Must have an empty constructor
         public SQLite_UWP() { }
 
