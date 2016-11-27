@@ -38,10 +38,7 @@ namespace TriageTagApplication.Droid
             //Create database file
             if ( !File.Exists( filePath ) ) {
                 // TODO: Figure out what to do if database file is not found
-            } else {
-                fs = File.Create( filePath );
-                fs.Close();
-            }
+            } 
 
             //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), filePath);
