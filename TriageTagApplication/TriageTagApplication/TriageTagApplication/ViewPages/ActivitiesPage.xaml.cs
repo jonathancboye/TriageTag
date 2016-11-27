@@ -17,7 +17,7 @@ namespace TriageTagApplication
         public ActivitiesPage() {
             InitializeComponent();
 
-            // Hide certain buttons depending on platfrom
+            //Hide certain buttons depending on platfrom
             if ( Device.OS == TargetPlatform.Windows ) {
                 scanTagButton.IsVisible = false;
                 synchronizeButton.IsVisible = false;
