@@ -25,7 +25,9 @@ namespace TriageTagApplication.Droid
         public void FtpRequest( string ftpUri, string username, string password ) {
             
             // Start Ftp client
-            WebRequest webrequest = FtpWebRequest.Create( ftpUri );
+            FtpWebRequest webrequest = WebRequest.Create( ftpUri ) as FtpWebRequest;
+
+            webrequest.UsePassive = true;
 
             // Set credientials
             webrequest.Credentials = new NetworkCredential( username, password);
@@ -34,7 +36,8 @@ namespace TriageTagApplication.Droid
             webrequest.Method = WebRequestMethods.Ftp.DownloadFile;
 
             // Make request and get response
-            WebResponse response = webrequest.GetResponse();
+            FtpWebResponse response = webrequest.GetResponse() as FtpWebResponse;
+            System.Diagnostics.Debug.WriteLine( "HERE");
 
             // Write response stream to file
             Stream stream = response.GetResponseStream();
@@ -45,6 +48,8 @@ namespace TriageTagApplication.Droid
             using ( var fileStream = new FileStream( filePath, FileMode.Create, FileAccess.Write ) ) {
                 stream.CopyTo( fileStream );
             }
+
+            response.Close();
         }
     }
 }
