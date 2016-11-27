@@ -14,7 +14,13 @@ namespace TriageTagApplication
         public int UID; // Current logged in user
         public int uLvl;
 
-        public App() {        
+        public App() {
+
+            // Try to update the database on android 
+            if( Device.OS == TargetPlatform.Android ) {
+                DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/database.db3", "Triage", "1234" );
+            }
+
             MainPage = new NavigationPage(new LoginPage());
         }
 
