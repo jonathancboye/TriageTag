@@ -50,8 +50,6 @@ namespace TriageTagApplication
 
         }
 
-
-
         private void OnSaveButtonClicked(object sender, EventArgs e)
         {
             

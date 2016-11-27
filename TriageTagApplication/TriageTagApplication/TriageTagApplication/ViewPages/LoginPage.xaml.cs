@@ -70,6 +70,7 @@ namespace TriageTagApplication
             intializeSalt();
             if ( users.Count == 1 || checkUserPassword()) {
                 await Navigation.PushAsync( new ActivitiesPage() );
+
             } else {
                 invalidText.IsVisible = true;
             }
@@ -90,6 +91,8 @@ namespace TriageTagApplication
 
             if (users.Count == 1)
             {
+                app.UID = users[0].employeeId;
+                app.uLvl = users[0].userLvl; 
                 valid = true;
 
             }
