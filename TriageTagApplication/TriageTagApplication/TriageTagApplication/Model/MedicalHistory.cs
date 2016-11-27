@@ -12,12 +12,12 @@ namespace TriageTagApplication
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
-        public int employeeId { get; set; }
-        public string allergies { get; set; }
-        public string bloodType { get; set; }
-        public string religion { get; set; }
-        public string highBloodPressure { get; set; }
-        public string medications { get; set; }
-        public string primaryDoctor { get; set; }
+        public byte[] employeeId { get; set; }
+        public byte[] allergies { get; set; }
+        public byte[] bloodType { get; set; }
+        public byte[] religion { get; set; }
+        public byte[] highBloodPressure { get; set; }
+        public byte[] medications { get; set; }
+        public byte[] primaryDoctor { get; set; }
     }
 }
