@@ -37,7 +37,7 @@ namespace TriageTagApplication.Droid
             string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
             //Create database file
             if ( !File.Exists( filePath ) ) {
-                // TODO: Figure out what to do if database file is not found
+                return null;// TODO: Figure out what to do if database file is not found
             } else {
                 fs = File.Create( filePath );
             }
