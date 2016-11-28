@@ -18,8 +18,7 @@ namespace TriageTagApplication
 
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
-            InitializeComponent();
-            
+            InitializeComponent();         
         }
 
        
@@ -44,7 +43,7 @@ namespace TriageTagApplication
             }
         }
 
-        private void OnButtonClicked( object sender, EventArgs e ) {
+        private void OnLoginButtonClicked( object sender, EventArgs e ) {
            
             if ( !connectionMade ) {
                 makeConnection();
@@ -57,15 +56,21 @@ namespace TriageTagApplication
             // Connect to database file
             app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
             
+            // Login failed
+            if(app.dbConnection == null ) {
+                await DisplayAlert( "ERROR", "Failed to create a connection with the database", "Close" );
+                return;
+            }
+
             // Create test database
-            //TestDatabase testDatabase =  new TestDatabase( app.dbConnection );
+            //TestDatabase testDatabase =  new TestDatabase( app.dbConnection ); 
+
             connectionMade = true;
 
             validate(); 
         }
 
         async private void validate() {
-
             List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
             intializeSalt();
             if ( users.Count == 1 || checkUserPassword()) {
@@ -77,8 +82,7 @@ namespace TriageTagApplication
 
             // Clear text fields
             username.Text = "";
-            password.Text = "";
-           
+            password.Text = "";           
         }
 
         private Boolean checkUserPassword()
@@ -88,7 +92,6 @@ namespace TriageTagApplication
             byte[] pValue = Crypto.EncryptAes(password.Text, App.pkey, app.salt);
             List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", uName, pValue);
            
-
             if (users.Count == 1)
             {
                 app.UID = users[0].employeeId;
@@ -99,7 +102,5 @@ namespace TriageTagApplication
 
             return valid;
         }
-
-
     }
 }

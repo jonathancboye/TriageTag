@@ -38,7 +38,7 @@
                     HorizontalOptions="CenterAndExpand"
                     IsEnabled="False"
                     BackgroundColor="Gray"
-                    Clicked="OnButtonClicked" />
+                    Clicked="OnLoginButtonClicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -35,7 +35,8 @@ namespace TriageTagApplication.Droid
             string sqliteFilename = "database.db3";
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
-            //Create database file
+            
+            // Check if database file exists
             if ( !File.Exists( filePath ) ) {
                 // TODO: Figure out what to do if database file is not found
             } 
