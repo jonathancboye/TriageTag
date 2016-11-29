@@ -20,6 +20,7 @@ namespace TriageTagApplication
             } else if ( Device.OS == TargetPlatform.Android ) {
                 editMedicalDataButton.IsVisible = false;
                 addUserButton.IsVisible = false;
+                
             }
         }
 
@@ -29,6 +30,11 @@ namespace TriageTagApplication
 
         async private void OnaddUserButtonClicked( object sender, EventArgs e ) {
             await Navigation.PushAsync( new addUserPage() );
+        }
+
+        async private void OndeleteButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DeleteUserPage());
         }
 
         async private void OnScanTagButtonClicked( object sender, EventArgs e ) {

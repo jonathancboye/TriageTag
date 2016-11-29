@@ -46,6 +46,9 @@
     <Compile Include="ViewPages\addUserPage.xaml.cs">
       <DependentUpon>addUserPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewPages\DeleteUserPage.xaml.cs">
+      <DependentUpon>DeleteUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewPages\DisplayMedicalDataPage.xaml.cs">
       <DependentUpon>DisplayMedicalDataPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewPages\addUserPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewPages\DeleteUserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
