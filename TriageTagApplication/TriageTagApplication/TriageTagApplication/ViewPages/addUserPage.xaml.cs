@@ -9,11 +9,11 @@ using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
-    public partial class addUserPage : ContentPage
+    public partial class AddUserPage : ContentPage
     {
         private string emId;
 
-        public addUserPage() {
+        public AddUserPage() {
             InitializeComponent();
         }
 

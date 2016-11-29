@@ -29,7 +29,7 @@ namespace TriageTagApplication
         }
 
         async private void OnaddUserButtonClicked( object sender, EventArgs e ) {
-            await Navigation.PushAsync( new addUserPage() );
+            await Navigation.PushAsync( new AddUserPage() );
         }
 
         async private void OndeleteButtonClicked(object sender, EventArgs e)
