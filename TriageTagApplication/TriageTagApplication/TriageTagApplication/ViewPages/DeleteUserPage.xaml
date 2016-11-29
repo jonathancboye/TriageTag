@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name ="thePage" xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriageTagApplication.DeleteUserPage" Title="TriageTag Delete User">
+
+  <StackLayout VerticalOptions ="Fill" HorizontalOptions="Fill" Spacing="20"  BackgroundColor ="Gray">
+
+    <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="Fill" Spacing="10" Margin ="70,50,0,0">
+      <Label x:Name="fnmLbl">
+        <Label.Text>Users</Label.Text>
+        <Label.WidthRequest>90</Label.WidthRequest>
+        <Label.FontSize>18</Label.FontSize>
+      </Label>
+
+      <Entry x:Name="fnmField" HorizontalOptions="Fill" WidthRequest ="500" HeightRequest="35">
+        <Entry.Placeholder>Enter First Name</Entry.Placeholder>
+      </Entry>
+
+    </StackLayout>
+
+    
+    
+
+  </StackLayout>
+</ContentPage>

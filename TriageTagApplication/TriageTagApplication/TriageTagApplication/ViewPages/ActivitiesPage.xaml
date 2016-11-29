@@ -35,8 +35,15 @@
                FontSize="Large"
                Font="Bold"
                Clicked="OnaddUserButtonClicked"/>
-      
 
+      <Button x:Name="deleteUser"
+              VerticalOptions="CenterAndExpand"
+              HorizontalOptions="CenterAndExpand"
+              Text="Delete User"
+              FontSize="Large"
+              Font="Bold"
+              Clicked="OndeleteButtonClicked"/>
+      
         <Button x:Name="logoutButton"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand"

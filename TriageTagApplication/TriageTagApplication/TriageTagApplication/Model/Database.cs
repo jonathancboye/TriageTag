@@ -94,6 +94,62 @@ namespace TriageTagApplication
             }
         }
 
+        static public List<String> getAllusers()
+        {
+            List<String> users = new List<String>();
+            List<EncryptedEmployee> encryps = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee");
+
+            foreach(EncryptedEmployee en in encryps){
+                DecryptedEmployee names = decryptEmployee(en);
+                users.Add(names.firstname + " " + names.lastname);
+            }
+
+            return users;
+        }
+
+        static public byte[] getEmployeeIdFromName(byte[] first, byte[] last)
+        {
+            byte[] emID;
+
+            List<EncryptedEmployee> ems  = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee Where firstname =? and lastname =?",first, last);
+
+            if (ems.Count > 0)
+            {
+                emID = ems[0].employeeId;
+                return emID;
+            }
+            else return null;
+
+        }
+
+        static public byte[] encrypt(String value)
+        {
+            return Crypto.EncryptAes(value, App.pkey, App.salt);
+        }
+
+        static public void deleteUser(byte[] emID)
+        {
+            List<EncryptedEmployee> ems = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee Where employeeId =?",emID);
+            List<EncryptedUser> users = App.dbConnection.Query<EncryptedUser>("SELECT * FROM EncryptedUser Where employeeId =?", emID);
+            List<EncryptedMedicalHistory> hist = App.dbConnection.Query<EncryptedMedicalHistory>("SELECT * FROM EncryptedMedicalHistory Where employeeId =?", emID);
+
+            if (ems.Count > 0)
+            {
+                App.dbConnection.Query<EncryptedEmployee>("DELETE FROM EncryptedEmployee Where employeeId =?", emID);
+            }
+
+            if(users.Count > 0)
+            {
+                App.dbConnection.Query<EncryptedUser>("DELETE FROM EncryptedUser Where employeeId =?", emID);
+            }
+
+            if (hist.Count > 0)
+            {
+                App.dbConnection.Query<EncryptedMedicalHistory>("DELETE FROM EncryptedMedicalHistory Where employeeId =?", emID);
+            }
+
+        }
+
         static public DecryptedUser getUser( string username, string password ) {
             byte[] uName = Crypto.EncryptAes(username, App.pkey,App.salt);
             byte[] pValue = Crypto.EncryptAes(password, App.pkey, App.salt);
@@ -112,10 +168,10 @@ namespace TriageTagApplication
             foreach ( EncryptedUser name in users ) {
                 string decryptedUsername = Crypto.DecryptAes( name.username, App.pkey, App.salt );
                 if ( decryptedUsername == username ) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         static public void updateMedicalHistory( DecryptedMedicalHistory mhistory ) {
