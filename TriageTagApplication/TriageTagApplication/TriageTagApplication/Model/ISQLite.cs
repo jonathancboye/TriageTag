@@ -11,6 +11,9 @@ namespace TriageTagApplication
     public interface ISQLite
     {
         // Returns: SQLiteConnection from a database file
-        Task<SQLiteConnection> getConnection();
+        Task<SQLiteConnection> getConnection(string filename);
+
+        // Copy file to Ftp Server
+        Task copyFileToFtpServer(string filename);
     }
 }

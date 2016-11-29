@@ -11,99 +11,93 @@ namespace TriageTagApplication
 {
     public partial class addUserPage : ContentPage
     {
+        private string emId;
 
-        App app = Application.Current as App;
-
-        private byte[] emId;
-        
-
-        public addUserPage()
-        {
+        public addUserPage() {
             InitializeComponent();
-
         }
 
-        async private void goBack()
-        {
+        async private void goBack() {
 
             await Navigation.PopAsync();
         }
 
-        private void OngenEmClicked(object sender, EventArgs E)
-        {
+        private void OngenEmClicked( object sender, EventArgs E ) {
 
-            if (formComplete())
-            {
-                string tempEmID = fnmField.Text + lnField.Text + new Random().Next(1, 1000).ToString();
+            if ( formComplete() ) {
+                emId = fnmField.Text + lnField.Text + new Random().Next( 1, 1000 ).ToString();
                 emError.IsVisible = false;
-                emId = Crypto.EncryptAes(tempEmID, App.pkey, app.salt);
-                emField.Text = tempEmID;
+                emField.Text = emId;
                 writeEm.IsVisible = true;
 
-            }
-            else { emError.IsVisible = true; writeEm.IsVisible = false; }
-
+            } else { emError.IsVisible = true; writeEm.IsVisible = false; }
         }
         //write the emID to the tag as employeeID
-        private void OnwriteEmClicked(object sender, EventArgs E)
-        {
+        private void OnwriteEmClicked( object sender, EventArgs E ) {
 
         }
 
-        private void OnSaveButtonClicked(object sender, EventArgs e)
-        {
-            
-            if (formComplete())
-            {
+        async private void OnSaveButtonClicked( object sender, EventArgs e ) {
 
-                if (checkUserName() && checkUserLvl() )
-                {
+            if ( formComplete() ) {
 
-                    app.dbConnection.Insert(new Users
-                    {
-                        employeeId = emId,
-                        username = Crypto.EncryptAes(userField.Text, App.pkey, app.salt),
-                        password = Crypto.EncryptAes(passField.Text, App.pkey, app.salt),
-                        userLvl = Crypto.EncryptAes(ulvlField.Text, App.pkey, app.salt)
-                    });
+                if ( checkUserName() && checkUserLvl() ) {
 
+                    App.dbConnection.Insert( 
+                        Database.encryptUser(
+                            new DecryptedUser {
+                                employeeId = emId,
+                                username = userField.Text,
+                                password = passField.Text,
+                                userLvl = ulvlField.Text
+                            } ) );
 
+                    App.dbConnection.Insert( 
+                        Database.encryptEmployee(
+                            new DecryptedEmployee {
+                                employeeId = emId,
+                                address = addressField.Text,
+                                phonenumber = phoneField.Text,
+                                emergencyContact = emergField.Text,
+                                firstname = fnmField.Text,
+                                lastname = lnField.Text,
+                            } ) );
 
-                    app.dbConnection.Insert(new Employee
-                    {
-                        employeeId = emId,
-                        address = Crypto.EncryptAes(addressField.Text, App.pkey, app.salt),
-                        phonenumber = Crypto.EncryptAes(phoneField.Text, App.pkey, app.salt),
-                        emergencyContact = Crypto.EncryptAes(emergField.Text, App.pkey, app.salt),
-                        firstname = Crypto.EncryptAes(fnmField.Text, App.pkey, app.salt),
-                        lastname = Crypto.EncryptAes(lnField.Text, App.pkey, app.salt)
-                    });
+                    App.dbConnection.Insert(
+                        Database.encryptMedicalHistory(
+                            new DecryptedMedicalHistory {
+                                employeeId = emId,
+                                allergies = "",
+                                bloodType = "",
+                                religion = "",
+                                highBloodPressure = "",
+                                medications = "",
+                                primaryDoctor = "",
+                            } ) );
 
                     errorReset();
                     clearFields();
-                    DisplayAlert("User added", "User" + fnmField.Text + " " + lnField.Text + " was succesfully added.", "OK");
+
+                    // Update the ftp server Database
+                    await DependencyService.Get<ISQLite>().copyFileToFtpServer(App.DatabaseFilename);
+
+                    await DisplayAlert( "User added", "User" + fnmField.Text + " " + lnField.Text + " was succesfully added.", "OK" );
                     goBack();
                 }
-
             }
-
         }
 
-        private Boolean checkUserLvl()
-        {
-            Boolean valid = true;
+        private bool checkUserLvl() {
+            bool valid = true;
             int lvl;
-            Boolean parsed = Int32.TryParse(ulvlField.Text, out lvl);
+            bool parsed = Int32.TryParse(ulvlField.Text, out lvl);
 
-            if (!parsed)
-            {
+            if ( !parsed ) {
                 lvlError.IsVisible = true;
                 lvlError.Text = "User lvl must be integer.";
                 valid = false;
-            }
-            else
-            {
-                if(lvl != 1 && lvl != 2){
+            } else {
+                if ( lvl != 1 && lvl != 2 ) {
                     lvlError.IsVisible = true;
                     lvlError.Text = "User lvl must be either 1 or 2";
                     valid = false;
@@ -111,97 +105,65 @@ namespace TriageTagApplication
             }
 
             return valid;
-
         }
+
         /*Ensure username isn't already in use. */
-        private Boolean checkUserName()
-        {
-            Boolean valid = true;
-            String uName = "";
-
-            List<Users> users = app.dbConnection.Query<Users>("SELECT username FROM Users");
-
-            foreach(Users name in users)
-            {
-
-                try
-                {
-                    uName = Crypto.DecryptAes(name.username, App.pkey, app.salt);
-
-                    if(uName == userField.Text) { valid = false;userError.IsVisible = true; userError.Text = "Username already in use.";  break; }
-                }catch { continue; }
-
+        private bool checkUserName() {
+            if ( Database.isUsernameTaken( userField.Text ) ) {
+                userError.IsVisible = true;
+                userError.Text = "Username already in use.";
+                return false;
             }
-
-            return valid;
+            return true;
         }
 
-        private Boolean formComplete()
-        {
-            Boolean completed = true;
+        private bool formComplete() {
+            bool completed = true;
 
-            if (fnmField.Text == null || fnmField.Text == "")
-            {
+            if ( fnmField.Text == null || fnmField.Text == "" ) {
                 completed = false;
                 firstError.IsVisible = true;
-            }
-            else firstError.IsVisible = false;
+            } else firstError.IsVisible = false;
 
-            if (lnField.Text == null || lnField.Text == "")
-            {
+            if ( lnField.Text == null || lnField.Text == "" ) {
                 completed = false;
                 lastError.IsVisible = true;
-            }
+            } else lastError.IsVisible = false;
 
-            else lastError.IsVisible = false;
-
-            if (addressField.Text == null || addressField.Text == "")
-            {
+            if ( addressField.Text == null || addressField.Text == "" ) {
                 completed = false;
                 addressError.IsVisible = true;
-            }
-            else addressError.IsVisible = false;
+            } else addressError.IsVisible = false;
 
-            if (phoneField.Text == null || phoneField.Text == "")
-            {
+            if ( phoneField.Text == null || phoneField.Text == "" ) {
                 completed = false;
                 phoneError.IsVisible = true;
-            }
-            else phoneError.IsVisible = false;
+            } else phoneError.IsVisible = false;
 
-            if (emergField.Text == null || emergField.Text == "")
-            {
+            if ( emergField.Text == null || emergField.Text == "" ) {
                 completed = false;
                 emergError.IsVisible = true;
-            }
-            else emergError.IsVisible = false;
+            } else emergError.IsVisible = false;
 
-            if (userField.Text == null || userField.Text == "")
-            {
+            if ( userField.Text == null || userField.Text == "" ) {
                 completed = false;
                 userError.IsVisible = true;
-            }
-            else userError.IsVisible = false;
+            } else userError.IsVisible = false;
 
-            if (passField.Text == null || passField.Text == "")
-            {
+            if ( passField.Text == null || passField.Text == "" ) {
                 completed = false;
                 passError.IsVisible = true;
-            }
-            else passError.IsVisible = false;
+            } else passError.IsVisible = false;
 
-            if (ulvlField.Text == null || ulvlField.Text == "")
-            {
+            if ( ulvlField.Text == null || ulvlField.Text == "" ) {
                 completed = false;
                 lvlError.IsVisible = true;
-            }
-            else lvlError.IsVisible = false;
+            } else lvlError.IsVisible = false;
 
             return completed;
         }
 
-        private void errorReset()
-        {
+        private void errorReset() {
             firstError.IsVisible = false;
             lastError.IsVisible = false;
             addressError.IsVisible = false;
@@ -215,8 +177,7 @@ namespace TriageTagApplication
             emError.IsVisible = false;
         }
 
-        private void clearFields()
-        {
+        private void clearFields() {
             fnmField.Text = "";
             lnField.Text = "";
             addressField.Text = "";

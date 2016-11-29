@@ -24,7 +24,6 @@
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name=".db3" DesiredView="default">
             <uap:DisplayName>Database</uap:DisplayName>
-            <uap:EditFlags OpenIsSafe="true" />
             <uap:SupportedFileTypes>
               <uap:FileType>.db3</uap:FileType>
             </uap:SupportedFileTypes>
@@ -35,6 +34,6 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <uap:Capability Name="picturesLibrary" />
+    <uap:Capability Name="documentsLibrary" />
   </Capabilities>
 </Package>

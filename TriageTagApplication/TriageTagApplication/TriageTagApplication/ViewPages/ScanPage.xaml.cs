@@ -13,7 +13,6 @@ namespace TriageTagApplication
         App app = Application.Current as App;
         public Button readButton;
         public Button writeButton;
-        private int tempUlvl;
 
         public ScanPage() {
             InitializeComponent();
@@ -35,10 +34,11 @@ namespace TriageTagApplication
                 HorizontalOptions = LayoutOptions.CenterAndExpand,
                 Text = "Cancel"
             };
+
             cancelButton.Clicked += OnCancelButtonClicked;
-            tempUlvl = Int32.Parse(Crypto.DecryptAes(app.uLvl, App.pkey, app.salt));
+
             // Only Administrators can write to tags
-            if(tempUlvl != 2 ) {
+            if(App.uLvl != "2" ) {
                 writeButton.IsVisible = false;
             }
 

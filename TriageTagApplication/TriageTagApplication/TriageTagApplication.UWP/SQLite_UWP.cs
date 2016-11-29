@@ -20,7 +20,7 @@ namespace TriageTagApplication.UWP
         public SQLite_UWP() { }
 
         // Returns: SQLiteConnection from a database file
-        async public Task<SQLiteConnection> getConnection() {
+        async public Task<SQLiteConnection> getConnection(string filename) {
             // File IO in UWP app is done with Windows.Storage API
 
             // Folder to store database for application to access
@@ -29,11 +29,12 @@ namespace TriageTagApplication.UWP
             try {
                 // Folder where ftp database is located
                 StorageFolder ftpDatabaseFolder = await KnownFolders.DocumentsLibrary.GetFolderAsync("FTP");
+               
                 // FTP database file
-                StorageFile ftpDatabaseFile = await ftpDatabaseFolder.GetFileAsync("database.db3");
+                StorageFile ftpDatabaseFile = await ftpDatabaseFolder.GetFileAsync(filename);
 
                 // Copy database file from FTP server to local application folder
-                StorageFile databaseFile = await ftpDatabaseFile.CopyAsync( localFolder, "database.db3", NameCollisionOption.ReplaceExisting );
+                StorageFile databaseFile = await ftpDatabaseFile.CopyAsync( localFolder, filename, NameCollisionOption.ReplaceExisting );
 
                 // Create SQLiteConnection
                 SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path);
@@ -44,6 +45,28 @@ namespace TriageTagApplication.UWP
             }
 
             return null;
+        }
+
+        async public Task copyFileToFtpServer(string filename) {
+            // Folder where local database is located
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+
+            try {
+                // Folder where ftp database is located
+                StorageFolder ftpDatabaseFolder = await KnownFolders.DocumentsLibrary.GetFolderAsync("FTP");
+
+                // Local database file
+                StorageFile databaseFile = await localFolder.GetFileAsync(filename);
+
+                // Copy database file from local application folder to FTP server
+                await databaseFile.CopyAsync( ftpDatabaseFolder, filename, NameCollisionOption.ReplaceExisting );
+
+                System.Diagnostics.Debug.WriteLine( "Successfully updated Ftp database file");
+            } catch (Exception exception ) {
+                System.Diagnostics.Debug.WriteLine( string.Format( "Failed to update Ftp database file: {0}", exception ) );
+            }
+
+            return;
         }
     }
 }

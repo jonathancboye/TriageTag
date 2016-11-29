@@ -10,10 +10,6 @@ namespace TriageTagApplication
 {
     public partial class ActivitiesPage : ContentPage
     {
-        App application = Application.Current as App;
-        public bool syncComplete = false;
-
-
         public ActivitiesPage() {
             InitializeComponent();
 

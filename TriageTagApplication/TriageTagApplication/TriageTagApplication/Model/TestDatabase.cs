@@ -1,83 +1,70 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using SQLite.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SQLite.Net;
 
-//namespace TriageTagApplication
-//{
-//    class TestDatabase
-//    {
-//        public TestDatabase(SQLiteConnection connection ) {
-//            createUserTable( connection );
-//            createEmployeeTable( connection );
-//            createMedicalHistoryTable( connection );
-//        }
+namespace TriageTagApplication
+{
+    class TestDatabase
+    {
+        public TestDatabase( SQLiteConnection connection ) {
+            createUserTable( connection );
+            createEmployeeTable( connection );
+            createMedicalHistoryTable( connection );
+        }
 
-//        public void createUserTable( SQLiteConnection connection ) {
-//            connection.CreateTable<Users>();
+        public void createUserTable( SQLiteConnection connection ) {
+            connection.CreateTable<EncryptedUser>();
 
-//            /*User level is added
-//             normal user:= 1
-//             admin user:= 2
-//             admin should have the ability to add new users and other features.*/
-//            connection.Insert( new Users {
-//                employeeId = "1",
-//                username = Jonathan,
-//                password = "Carpenter",
-//                userLvl = "2"
-//            } );
+            /*User level is added
+             normal user:= 1
+             admin user:= 2
+             admin should have the ability to add new users and other features.*/
+            connection.Insert(
+                Database.encryptUser(
+                    Database.createDecryptedUser( "1", "Jonathan", "Carpenter", "2" ) ) );
 
-//            connection.Insert( new Users {
-//                employeeId = "2",
-//                username = "Troy",
-//                password = "Caplinger",
-//                userLvl = "1"
-//            } );
+            connection.Insert(
+                Database.encryptUser(
+                    Database.createDecryptedUser( "2", "Troy", "Caplinger", "1" ) ) );
 
-//            connection.Insert( new Users {
-//                employeeId = "3",
-//                username = "Anthony",
-//                password = "Inman",
-//                userLvl = "2"
-//            } );
+            connection.Insert(
+                Database.encryptUser(
+                    Database.createDecryptedUser( "3", "Anthony", "Inman", "2" ) ) );
 
-//            connection.Insert( new Users {
-//                employeeId = "4",
-//                username = "Vincent",
-//                password = "Haenni",
-//                userLvl = "1"
-//            } );
-//        }
+            connection.Insert(
+                Database.encryptUser(
+                    Database.createDecryptedUser( "4", "Vincent", "Haenni", "1" ) ) );
+        }
 
-//        public void createEmployeeTable( SQLiteConnection connection ) {
-//            connection.CreateTable<Employee>();
+        public void createEmployeeTable( SQLiteConnection connection ) {
+            connection.CreateTable<EncryptedEmployee>();
+            connection.Insert(
+                Database.encryptEmployee(
+                    Database.createDecryptedEmployee(
+                    "1",
+                    "Jonathan",
+                    "Carpenter",
+                    "880 West Alkaline Springs rd",
+                    "937-371-3348",
+                    "Mr. Robot Chicken" ) ) );
+        }
 
-//            connection.Insert( new Employee {
-//                employeeId = "1",
-//                firstname = "Jonathan",
-//                lastname = "Carpenter",
-//                address = "880 West Alkaline Springs rd",
-//                phonenumber = "937-371-3348",
-//                emergencyContact = "Mr. Robot Chicken"
-//            } );
 
-//        }
-
-//        public void createMedicalHistoryTable(SQLiteConnection connection ) {
-//            connection.CreateTable<MedicalHistory>();
-
-//            connection.Insert( new MedicalHistory {
-
-//                employeeId = "1",
-//                allergies = "cats, dogs, horses, dust",
-//                bloodType = "O",
-//                religion = "Atheist",
-//                highBloodPressure = "no",
-//                medications = "inhaler",
-//                primaryDoctor = "Dr. Randel"
-//            } );
-//        }
-//    }
-//}
+        public void createMedicalHistoryTable( SQLiteConnection connection ) {
+            connection.CreateTable<EncryptedMedicalHistory>();
+            connection.Insert(
+                Database.encryptMedicalHistory(
+                    Database.createDecryptedMedicalHistory(
+                        "1", 
+                        "cats, dogs, horses, dust", 
+                        "O", 
+                        "Atheist", 
+                        "no",
+                        "inhaler", 
+                        "Dr. Randel" ) ) );
+        }
+    }
+}

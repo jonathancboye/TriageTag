@@ -68,6 +68,5 @@ namespace TriageTagApplication
             var bytes = WinRTCrypto.CryptographicEngine.Decrypt(symetricKey, data);
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
-
     }
 }

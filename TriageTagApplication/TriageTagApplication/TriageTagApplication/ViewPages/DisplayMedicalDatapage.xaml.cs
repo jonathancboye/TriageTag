@@ -10,8 +10,7 @@ namespace TriageTagApplication
 {
     public partial class DisplayMedicalDataPage : ContentPage
     {
-        App app = Application.Current as App;
-        MedicalHistory mhistory;
+        DecryptedMedicalHistory mhistory;
         string _employeeId;
 
         public DisplayMedicalDataPage(string employeeId) {
@@ -19,14 +18,12 @@ namespace TriageTagApplication
             InitializeComponent();
             makeGrid();
         }
+
         private void makeGrid() {
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
-            // get test data
-            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", _employeeId );
-            if ( mhistorys.Count > 0 ) {
-                mhistory = mhistorys[0];
-            } else {
+            mhistory = Database.getMedicalHistory( App.UID );
+            if (mhistory == null) {
                 // No medical history found
                 System.Diagnostics.Debug.WriteLine( "No medical history" );
                 return;

@@ -10,17 +10,19 @@ namespace TriageTagApplication
 {
     public class App: Application
     {
-        public SQLiteConnection dbConnection; // Database Connection
-        public byte[] UID; // Current logged in user
-        public byte[] uLvl;
-        public const String pkey = "btggX!AFnvAOEe7P";
+        public static SQLiteConnection dbConnection; // Database Connection
+        public static string UID; // Current logged in user
+        public static string uLvl;
+        public static byte[] salt = new byte[] {0x20, 0x21, 0x69, 0x72, 0x89, 0x12, 0x57, 0x00, 0x12, 0x23 };
+        public const string pkey = "btggX!AFnvAOEe7P";
+        public const string DatabaseFilename = "test.db3";
+       
 
-        public byte[] salt;
 
-        public App() {
-
+        public App() {         
             if ( Device.OS == TargetPlatform.Android ) {
-                DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/database.db3", "Triage", "1234" );
+                // Grab database file from Ftp server
+                DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/" + App.DatabaseFilename, "Triage", "1234" );
             }
 
             MainPage = new NavigationPage(new LoginPage());

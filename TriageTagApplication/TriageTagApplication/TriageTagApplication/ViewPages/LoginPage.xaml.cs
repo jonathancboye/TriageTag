@@ -6,26 +6,17 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using SQLite.Net;
-
 using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
     public partial class LoginPage : ContentPage
     {
-        App app = Application.Current as App;
         bool connectionMade = false;
 
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
-            InitializeComponent();         
-        }
-
-       
-        private void intializeSalt()
-        {
-            List<Salt> salts = app.dbConnection.Query<Salt>("SELECT * FROM Salt WHERE Id = 1");
-            app.salt = salts[0].key;
+            InitializeComponent();
         }
 
         /*
@@ -44,7 +35,7 @@ namespace TriageTagApplication
         }
 
         private void OnLoginButtonClicked( object sender, EventArgs e ) {
-           
+
             if ( !connectionMade ) {
                 makeConnection();
             } else {
@@ -54,50 +45,42 @@ namespace TriageTagApplication
 
         async private void makeConnection() {
             // Connect to database file
-            app.dbConnection = await DependencyService.Get<ISQLite>().getConnection();
-            
+            App.dbConnection = await DependencyService.Get<ISQLite>().getConnection(App.DatabaseFilename);
+
+           
+
             // Login failed
-            if(app.dbConnection == null ) {
+            if ( App.dbConnection == null ) {
                 await DisplayAlert( "ERROR", "Failed to create a connection with the database", "Close" );
                 return;
             }
 
             // Create test database
-            //TestDatabase testDatabase =  new TestDatabase( app.dbConnection ); 
+            //TestDatabase testDatabase =  new TestDatabase( App.dbConnection );
 
             connectionMade = true;
-
-            validate(); 
+            validate();
         }
 
         async private void validate() {
-            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", username.Text, password.Text);
-            intializeSalt();
-            if ( users.Count == 1 || checkUserPassword()) {
+            if ( checkUserPassword() ) {
                 await Navigation.PushAsync( new ActivitiesPage() );
-
             } else {
                 invalidText.IsVisible = true;
             }
 
             // Clear text fields
             username.Text = "";
-            password.Text = "";           
+            password.Text = "";
         }
 
-        private Boolean checkUserPassword()
-        {
-            Boolean valid = false;
-            byte[] uName = Crypto.EncryptAes(username.Text,App.pkey,app.salt);
-            byte[] pValue = Crypto.EncryptAes(password.Text, App.pkey, app.salt);
-            List<Users> users = app.dbConnection.Query<Users>("SELECT * FROM Users WHERE username=? AND password=?", uName, pValue);
-           
-            if (users.Count == 1)
-            {
-                app.UID = users[0].employeeId;
-                app.uLvl = users[0].userLvl; 
+        private bool checkUserPassword() {
+            bool valid = false;
+            DecryptedUser user = Database.getUser( username.Text, password.Text );
+            if ( user != null ) {
+                App.UID = user.employeeId;
+                App.uLvl = user.userLvl;
                 valid = true;
-
             }
 
             return valid;
