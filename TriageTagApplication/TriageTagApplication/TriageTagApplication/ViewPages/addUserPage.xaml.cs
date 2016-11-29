@@ -28,9 +28,8 @@ namespace TriageTagApplication
                 emId = fnmField.Text + lnField.Text + new Random().Next( 1, 1000 ).ToString();
                 emError.IsVisible = false;
                 emField.Text = emId;
-                writeEm.IsVisible = true;
 
-            } else { emError.IsVisible = true; writeEm.IsVisible = false; }
+            } else { emError.IsVisible = true; }
         }
 
         async private void OnSaveButtonClicked( object sender, EventArgs e ) {
@@ -182,7 +181,6 @@ namespace TriageTagApplication
             userField.Text = "";
             passField.Text = "";
             ulvlField.Text = "";
-            writeEm.IsVisible = false;
             emField.Text = "";
         }
 

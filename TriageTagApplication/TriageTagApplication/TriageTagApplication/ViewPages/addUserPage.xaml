@@ -176,29 +176,21 @@
         <Entry.Placeholder>Press generate button</Entry.Placeholder>
       </Entry>
 
-      <Button x:Name = "genEm"  WidthRequest="90" FontAttributes ="Bold" Clicked ="OngenEmClicked" >
+            <Button x:Name="genEm"
+                    WidthRequest="90"
+                    FontAttributes="Bold"
+                    Clicked="OngenEmClicked">
 
-        <Button.Text>Generate</Button.Text>
-        <Button.FontSize>16</Button.FontSize>
-        <Button.BorderWidth>3</Button.BorderWidth>
-        <Button.BorderColor>Black</Button.BorderColor>
-        <Button.BackgroundColor>Blue</Button.BackgroundColor>
-        <Button.FontFamily>Gothic</Button.FontFamily>
+                <Button.Text>Generate</Button.Text>
+                <Button.FontSize>16</Button.FontSize>
+                <Button.BorderWidth>3</Button.BorderWidth>
+                <Button.BorderColor>Black</Button.BorderColor>
+                <Button.BackgroundColor>Blue</Button.BackgroundColor>
+                <Button.FontFamily>Gothic</Button.FontFamily>
 
-      </Button>
+            </Button>
 
-      <Button x:Name = "writeEm" WidthRequest="90" FontAttributes ="Bold" Clicked ="OnwriteEmClicked" IsVisible="False" >
-
-        <Button.Text>Write</Button.Text>
-        <Button.FontSize>16</Button.FontSize>
-        <Button.BorderWidth>3</Button.BorderWidth>
-        <Button.BorderColor>Black</Button.BorderColor>
-        <Button.BackgroundColor>Green</Button.BackgroundColor>
-        <Button.FontFamily>Gothic</Button.FontFamily>
-
-      </Button>
-
-      <Label x:Name="emError">
+            <Label x:Name="emError">
         <Label.Text>Complete Form</Label.Text>
         <Label.WidthRequest>200</Label.WidthRequest>
         <Label.FontSize>14</Label.FontSize>
