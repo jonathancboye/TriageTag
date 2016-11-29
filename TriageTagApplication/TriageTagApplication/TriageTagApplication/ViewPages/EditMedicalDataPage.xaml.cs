@@ -10,7 +10,8 @@ namespace TriageTagApplication
 {
     public partial class EditMedicalDataPage : ContentPage
     {
-        DecryptedMedicalHistory mhistory;
+        App app = Application.Current as App;
+        MedicalHistory mhistory;
         Editable editable;  // If true then Entrys are editable
 
         public EditMedicalDataPage() {
@@ -26,8 +27,10 @@ namespace TriageTagApplication
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
             // Check for medical history
-            mhistory = Database.getMedicalHistory(App.UID);
-            if(mhistory == null ) { 
+            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID);
+            if ( mhistorys.Count > 0 ) {
+                mhistory = mhistorys[0];
+            } else {
                 // No medical history found
                 System.Diagnostics.Debug.WriteLine( "No medical history" );
                 return;
@@ -95,13 +98,11 @@ namespace TriageTagApplication
             grid.Children.Add( entry );
         }
 
-        async private void OnSaveButtonClicked( object sender, EventArgs e ) {
+        private void OnSaveButtonClicked( object sender, EventArgs e ) {
             // Update the database
-            Database.updateMedicalHistory( mhistory );
-            editable.IsEditable = false;
+            app.dbConnection.Update( mhistory );
 
-            // Update the Ftp database file
-            await DependencyService.Get<ISQLite>().copyFileToFtpServer(App.DatabaseFilename);
+            editable.IsEditable = false;
         }
 
         private void OnEditButtonClicked( object sender, EventArgs e ) {
