@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.IO;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,16 @@ namespace TriageTagApplication.Droid
     {
         public FtpRequest_Android() { }
 
-        public void FtpRequest( string ftpUri, string username, string password ) {
+        async public Task<bool> FtpRequest( string ftpUri, string username, string password ) {
             
             // Start Ftp client
             FtpWebRequest webrequest = WebRequest.Create( ftpUri ) as FtpWebRequest;
 
+            // Ftp server uses passive mode
             webrequest.UsePassive = true;
+
+            // Set timeout to 5 seconds
+            webrequest.Timeout = 5000; 
 
             // Set credientials
             webrequest.Credentials = new NetworkCredential( username, password);
@@ -35,21 +40,27 @@ namespace TriageTagApplication.Droid
             // Set the ftp protocol method
             webrequest.Method = WebRequestMethods.Ftp.DownloadFile;
 
-            // Make request and get response
-            FtpWebResponse response = webrequest.GetResponse() as FtpWebResponse;
-            System.Diagnostics.Debug.WriteLine( "HERE");
+            try {
+                // Make request and get response
+                FtpWebResponse response = webrequest.GetResponse() as FtpWebResponse;
 
-            // Write response stream to file
-            Stream stream = response.GetResponseStream();
-            string sqliteFilename = "database.db3";
-            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            string filePath = Path.Combine( folderPath, sqliteFilename );
+                // Write response stream to file
+                Stream stream = response.GetResponseStream();
+                string sqliteFilename = "database.db3";
+                string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                string filePath = Path.Combine( folderPath, sqliteFilename );
 
-            using ( var fileStream = new FileStream( filePath, FileMode.Create, FileAccess.Write ) ) {
-                stream.CopyTo( fileStream );
-            }
+                using ( var fileStream = new FileStream( filePath, FileMode.Create, FileAccess.Write ) ) {
+                    stream.CopyTo( fileStream );
+                }
 
-            response.Close();
+                response.Close();
+            } catch ( WebException exception ) {
+                System.Diagnostics.Debug.WriteLine( "Request timed out: " , exception );
+                return false;
+            } 
+            
+            return true;
         }
     }
 }

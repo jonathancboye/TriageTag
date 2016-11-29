@@ -36,7 +36,7 @@ namespace TriageTagApplication.Droid
 
             // Check if database file exists
             if ( !File.Exists( filePath ) ) {
-                // TODO: Figure out what to do if database file is not found
+                return null;
             }
 
             //Create SQLiteConnection

@@ -8,6 +8,6 @@ namespace TriageTagApplication
 {
     public interface IFtpRequest
     {
-        void FtpRequest( string ftpUri, string username, string password);
+        Task<bool> FtpRequest( string ftpUri, string username, string password);
     }
 }

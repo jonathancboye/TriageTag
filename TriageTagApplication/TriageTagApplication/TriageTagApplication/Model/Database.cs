@@ -79,57 +79,78 @@ namespace TriageTagApplication
     {
         static public DecryptedMedicalHistory getMedicalHistory( string emId ) {
             byte[] encrypted_emId = Crypto.EncryptAes(emId, App.pkey, App.salt);
-            List<EncryptedMedicalHistory> mhistorys = App.dbConnection.Query<EncryptedMedicalHistory>( "SELECT * FROM EncryptedMedicalHistory WHERE employeeId=?", encrypted_emId );
-            if ( mhistorys.Count != 1 ) {
-                return null;
-            } else {
-                EncryptedMedicalHistory mhistory = mhistorys[0];
-                return decryptMedicalHistory( mhistory );
+            try {
+                List<EncryptedMedicalHistory> mhistorys = App.dbConnection.Query<EncryptedMedicalHistory>( "SELECT * FROM EncryptedMedicalHistory WHERE employeeId=?", encrypted_emId );
+                if ( mhistorys.Count != 1 ) {
+                    return null;
+                } else {
+                    EncryptedMedicalHistory mhistory = mhistorys[0];
+                    return decryptMedicalHistory( mhistory );
+                }
+            } catch ( SQLiteException exception ) {
+                System.Diagnostics.Debug.WriteLine( "Invalid database: " + exception );
+                throw;
             }
         }
 
         static public DecryptedUser getUser( string username, string password ) {
             byte[] uName = Crypto.EncryptAes(username, App.pkey,App.salt);
             byte[] pValue = Crypto.EncryptAes(password, App.pkey, App.salt);
-            List<EncryptedUser> users = App.dbConnection.Query<EncryptedUser>("SELECT * FROM EncryptedUser WHERE username=? AND password=?", uName, pValue);
-            if ( users.Count != 1 ) {
-                return null;
-            } else {
-                EncryptedUser user = users[0];
-                return decryptUser( user );
+            try {
+                List<EncryptedUser> users = App.dbConnection.Query<EncryptedUser>("SELECT * FROM EncryptedUser WHERE username=? AND password=?", uName, pValue);
+                if ( users.Count == 1 ) {
+                    EncryptedUser user = users[0];
+                    return decryptUser( user );
+                }
+            } catch ( SQLiteException exception ) {
+                System.Diagnostics.Debug.WriteLine( "Invalid database: " + exception );
+                throw;
             }
+
+            return null;
         }
 
         static public bool isUsernameTaken( string username ) {
-            List<EncryptedUser> users = App.dbConnection.Query<EncryptedUser>("SELECT username FROM EncryptedUser");
+            try {
+                List<EncryptedUser> users = App.dbConnection.Query<EncryptedUser>("SELECT username FROM EncryptedUser");
 
-            foreach ( EncryptedUser name in users ) {
-                string decryptedUsername = Crypto.DecryptAes( name.username, App.pkey, App.salt );
-                if ( decryptedUsername == username ) {
-                    return false;
+                foreach ( EncryptedUser name in users ) {
+                    string decryptedUsername = Crypto.DecryptAes( name.username, App.pkey, App.salt );
+                    if ( decryptedUsername == username ) {
+                        return false;
+                    }
                 }
+                return true;
+            } catch ( SQLiteException exception ) {
+                System.Diagnostics.Debug.WriteLine( "Invalid database: " + exception );
+                throw;
             }
-            return true;
         }
 
         static public void updateMedicalHistory( DecryptedMedicalHistory mhistory ) {
             EncryptedMedicalHistory eh = encryptMedicalHistory( mhistory );
-            App.dbConnection.Query<EncryptedMedicalHistory>( "UPDATE EncryptedMedicalHistory "+
-                                                            "SET " + 
-                                                            "allergies=?," +
-                                                            "bloodType=?," +
-                                                            "religion=?," +
-                                                            "highBloodPressure=?," +
-                                                            "medications=?," +
-                                                            "primaryDoctor=? " +
-                                                            "WHERE employeeId=?",
-                                                            eh.allergies,
-                                                            eh.bloodType,
-                                                            eh.religion,
-                                                            eh.highBloodPressure,
-                                                            eh.medications,
-                                                            eh.primaryDoctor,
-                                                            eh.employeeId );
+            try {
+
+                App.dbConnection.Query<EncryptedMedicalHistory>( "UPDATE EncryptedMedicalHistory " +
+                                                                "SET " +
+                                                                "allergies=?," +
+                                                                "bloodType=?," +
+                                                                "religion=?," +
+                                                                "highBloodPressure=?," +
+                                                                "medications=?," +
+                                                                "primaryDoctor=? " +
+                                                                "WHERE employeeId=?",
+                                                                eh.allergies,
+                                                                eh.bloodType,
+                                                                eh.religion,
+                                                                eh.highBloodPressure,
+                                                                eh.medications,
+                                                                eh.primaryDoctor,
+                                                                eh.employeeId );
+            } catch ( SQLiteException exception ) {
+                System.Diagnostics.Debug.WriteLine( "Invalid database: " + exception );
+                throw;
+            }
         }
 
         static public DecryptedMedicalHistory createDecryptedMedicalHistory(

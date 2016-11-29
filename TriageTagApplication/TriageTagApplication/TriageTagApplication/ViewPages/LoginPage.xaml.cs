@@ -17,6 +17,23 @@ namespace TriageTagApplication
         public LoginPage() {
             Padding = new Thickness( 5, 20, 5, 20 );
             InitializeComponent();
+
+            if ( Device.OS == TargetPlatform.Android ) {
+                updateDatabase();
+            }
+        }
+        
+        // Grab database file from Ftp server
+        async private Task updateDatabase() {
+            connectionStatus.IsVisible = true;
+            bool updated = await DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/" + App.DatabaseFilename, "Triage", "1234" );
+
+            if ( updated ) {
+                connectionStatus.TextColor = Color.Green;
+                connectionStatus.Text = "Successfully updated database";
+            }else {
+                connectionStatus.Text = "Database not updated";
+            }
         }
 
         /*
@@ -35,7 +52,6 @@ namespace TriageTagApplication
         }
 
         private void OnLoginButtonClicked( object sender, EventArgs e ) {
-
             if ( !connectionMade ) {
                 makeConnection();
             } else {
@@ -46,8 +62,6 @@ namespace TriageTagApplication
         async private void makeConnection() {
             // Connect to database file
             App.dbConnection = await DependencyService.Get<ISQLite>().getConnection(App.DatabaseFilename);
-
-           
 
             // Login failed
             if ( App.dbConnection == null ) {

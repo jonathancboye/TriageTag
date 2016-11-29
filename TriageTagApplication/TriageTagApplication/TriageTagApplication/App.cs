@@ -20,11 +20,6 @@ namespace TriageTagApplication
 
 
         public App() {         
-            if ( Device.OS == TargetPlatform.Android ) {
-                // Grab database file from Ftp server
-                DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/" + App.DatabaseFilename, "Triage", "1234" );
-            }
-
             MainPage = new NavigationPage(new LoginPage());
         }
 
