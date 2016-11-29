@@ -32,10 +32,6 @@ namespace TriageTagApplication
 
             } else { emError.IsVisible = true; writeEm.IsVisible = false; }
         }
-        //write the emID to the tag as employeeID
-        private void OnwriteEmClicked( object sender, EventArgs E ) {
-
-        }
 
         async private void OnSaveButtonClicked( object sender, EventArgs e ) {
 
