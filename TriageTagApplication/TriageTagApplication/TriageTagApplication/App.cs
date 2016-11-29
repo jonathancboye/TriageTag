@@ -13,7 +13,7 @@ namespace TriageTagApplication
         public static SQLiteConnection dbConnection; // Database Connection
         public static string UID; // Current logged in user
         public static string uLvl;
-        public static byte[] salt = new byte[] {0x20, 0x21, 0x69, 0x72, 0x89, 0x12, 0x57, 0x00, 0x12, 0x23 };
+        public static byte[] salt = {0x20, 0x21, 0x69, 0x72, 0x89, 0x12, 0x57, 0x00, 0x12, 0x23 };
         public const string pkey = "btggX!AFnvAOEe7P";
         public const string DatabaseFilename = "test.db3";
        

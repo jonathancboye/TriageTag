@@ -97,7 +97,7 @@ namespace TriageTagApplication
 
         async private void OnSaveButtonClicked( object sender, EventArgs e ) {
             // Update the database
-           Database.updateMedicalHistory( mhistory );
+            Database.updateMedicalHistory( mhistory );
             editable.IsEditable = false;
 
             // Update the Ftp database file

@@ -2946,6 +2946,9 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f03003a
 			public const int WriterActivity = 2130903098;
 			
+			// aapt resource value: 0x7f03003b
+			public const int WriterActivity2 = 2130903099;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

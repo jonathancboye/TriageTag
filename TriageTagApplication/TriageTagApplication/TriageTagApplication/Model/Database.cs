@@ -21,9 +21,6 @@ namespace TriageTagApplication
 
     class DecryptedUser
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        [Indexed]
         public string employeeId { get; set; }
         public string username { get; set; }
         public string password { get; set; }
@@ -45,9 +42,6 @@ namespace TriageTagApplication
 
     class DecryptedEmployee
     {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        [Indexed]
         public string employeeId { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
