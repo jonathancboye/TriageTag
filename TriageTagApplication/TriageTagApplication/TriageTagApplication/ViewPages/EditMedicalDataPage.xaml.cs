@@ -27,7 +27,7 @@ namespace TriageTagApplication
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
             // Check for medical history
-            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID );
+            List<MedicalHistory> mhistorys = app.dbConnection.Query<MedicalHistory>( "SELECT * FROM MedicalHistory WHERE employeeId=?", app.UID);
             if ( mhistorys.Count > 0 ) {
                 mhistory = mhistorys[0];
             } else {

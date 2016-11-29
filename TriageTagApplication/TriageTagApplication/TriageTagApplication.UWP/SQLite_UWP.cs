@@ -35,3 +35,5 @@ namespace TriageTagApplication.UWP
         }
     }
 }
+
+
