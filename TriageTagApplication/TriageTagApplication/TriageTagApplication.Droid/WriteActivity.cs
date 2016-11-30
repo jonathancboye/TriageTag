@@ -29,8 +29,9 @@ namespace TriageTagApplication.Droid
         protected override void OnCreate( Bundle savedInstanceState ) {
             base.OnCreate( savedInstanceState );
 
-            SetContentView( Resource.Layout.WriterActivity );
+            SetContentView( Resource.Layout.WriterActivity2 );
             Button writeButton = FindViewById<Button>(Resource.Id.writeButton);
+            
 
             // Get NFC Adapter
             nfcAdapter = NfcAdapter.GetDefaultAdapter( this );
@@ -46,6 +47,7 @@ namespace TriageTagApplication.Droid
                 Dialog dialog = alert.Create();
                 dialog.Show();
             }
+
             var intentFilter = new IntentFilter(NfcAdapter.ActionTagDiscovered);
             var intent = new Intent( this, GetType() ).AddFlags( ActivityFlags.SingleTop );
             intentFilters = new[] { intentFilter };

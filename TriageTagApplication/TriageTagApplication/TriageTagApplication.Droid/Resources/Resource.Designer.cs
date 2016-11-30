@@ -2553,9 +2553,6 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f07004c
 			public const int scrollView = 2131165260;
 			
-			// aapt resource value: 0x7f07009e
-			public const int scrollView1 = 2131165342;
-			
 			// aapt resource value: 0x7f070039
 			public const int scrollable = 2131165241;
 			
