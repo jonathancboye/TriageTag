@@ -22,7 +22,7 @@ namespace TriageTagApplication
                 updateDatabase();
             }
         }
-        
+
         // Grab database file from Ftp server
         async private Task updateDatabase() {
             connectionStatus.IsVisible = true;
@@ -31,7 +31,7 @@ namespace TriageTagApplication
             if ( updated ) {
                 connectionStatus.TextColor = Color.Green;
                 connectionStatus.Text = "Successfully updated database";
-            }else {
+            } else {
                 connectionStatus.Text = "Database not updated";
             }
         }
