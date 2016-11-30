@@ -30,9 +30,8 @@ namespace TriageTagApplication.Droid
             //File IO on Android is done with System.IO API
 
             //This is an example of how one might creat a connection to a database file
-            string sqliteFilename = "database.db3";
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
+            string filePath = Path.Combine( folderPath, filename ); // Documents folder
 
             // Check if database file exists
             if ( !File.Exists( filePath ) ) {
@@ -41,6 +40,24 @@ namespace TriageTagApplication.Droid
 
             //Create SQLiteConnection
             SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), filePath);
+
+            return connection;
+        }
+
+        async public Task<SQLiteConnection> getTestConnection() {
+            //File IO on Android is done with System.IO API
+
+            //This is an example of how one might creat a connection to a database file
+            string sqliteFilename = "test.db3";
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string filePath = Path.Combine( folderPath, sqliteFilename ); // Documents folder
+
+            // Create or overwrite file
+            File.Create( filePath );
+
+            //Create SQLiteConnection
+            SQLiteConnection connection = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), filePath);
+            new TestDatabase( connection );
 
             return connection;
         }

@@ -2412,6 +2412,9 @@ namespace TriageTagApplication.Droid
 			// aapt resource value: 0x7f070094
 			public const int line3 = 2131165332;
 			
+			// aapt resource value: 0x7f07009e
+			public const int linearLayout = 2131165342;
+			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
 			

@@ -7,7 +7,7 @@ using SQLite.Net;
 
 namespace TriageTagApplication
 {
-    class TestDatabase
+    public class TestDatabase
     {
         public TestDatabase( SQLiteConnection connection ) {
             createUserTable( connection );

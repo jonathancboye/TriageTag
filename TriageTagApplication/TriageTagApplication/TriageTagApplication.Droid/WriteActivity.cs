@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Nfc;
 using Android.Nfc.Tech;
 
+
 namespace TriageTagApplication.Droid
 {
     [Activity( Label = "WriteActivity" )]
@@ -31,7 +32,8 @@ namespace TriageTagApplication.Droid
 
             SetContentView( Resource.Layout.WriterActivity2 );
             Button writeButton = FindViewById<Button>(Resource.Id.writeButton);
-            
+
+            initializeScrollView();
 
             // Get NFC Adapter
             nfcAdapter = NfcAdapter.GetDefaultAdapter( this );
@@ -54,6 +56,16 @@ namespace TriageTagApplication.Droid
             pendingintent = PendingIntent.GetActivity( this, 0, intent, 0 );
 
             writeButton.Click += OnWriteButtonClicked;
+        }
+
+        private void initializeScrollView() {
+            LinearLayout linLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
+            List<string> users = Database.getAllusers();
+
+            foreach(string user in users ) {
+                linLayout.AddView( new TextView( this ) );
+            }
+
         }
 
         private void OnWriteButtonClicked( object sender, EventArgs eventArgs ) {

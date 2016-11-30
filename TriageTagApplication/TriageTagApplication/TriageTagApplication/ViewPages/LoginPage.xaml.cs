@@ -60,17 +60,21 @@ namespace TriageTagApplication
         }
 
         async private void makeConnection() {
+
             // Connect to database file
-            App.dbConnection = await DependencyService.Get<ISQLite>().getConnection(App.DatabaseFilename);
+            if ( App.DEBUG ) {
+                App.dbConnection = await DependencyService.Get<ISQLite>().getTestConnection();
+            }else {
+                App.dbConnection = await DependencyService.Get<ISQLite>().getConnection( App.DatabaseFilename );
+            }
+
+          
 
             // Login failed
             if ( App.dbConnection == null ) {
                 await DisplayAlert( "ERROR", "Failed to create a connection with the database", "Close" );
                 return;
             }
-
-            // Create test database
-            //TestDatabase testDatabase =  new TestDatabase( App.dbConnection );
 
             connectionMade = true;
             validate();

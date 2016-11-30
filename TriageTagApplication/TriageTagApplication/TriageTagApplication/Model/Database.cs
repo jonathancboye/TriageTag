@@ -8,7 +8,7 @@ using SQLite.Net;
 
 namespace TriageTagApplication
 {
-    class EncryptedUser
+    public class EncryptedUser
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace TriageTagApplication
         public byte[] userLvl { get; set; }
     }
 
-    class DecryptedUser
+    public class DecryptedUser
     {
         public string employeeId { get; set; }
         public string username { get; set; }
@@ -27,7 +27,7 @@ namespace TriageTagApplication
         public string userLvl { get; set; }
     }
 
-    class EncryptedEmployee
+    public class EncryptedEmployee
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -40,7 +40,7 @@ namespace TriageTagApplication
         public byte[] emergencyContact { get; set; }
     }
 
-    class DecryptedEmployee
+    public class DecryptedEmployee
     {
         public string employeeId { get; set; }
         public string firstname { get; set; }
@@ -50,7 +50,7 @@ namespace TriageTagApplication
         public string emergencyContact { get; set; }
     }
 
-    class EncryptedMedicalHistory
+    public class EncryptedMedicalHistory
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -64,7 +64,7 @@ namespace TriageTagApplication
         public byte[] primaryDoctor { get; set; }
     }
 
-    class DecryptedMedicalHistory
+    public class DecryptedMedicalHistory
     {
         public string employeeId { get; set; }
         public string allergies { get; set; }
@@ -75,7 +75,7 @@ namespace TriageTagApplication
         public string primaryDoctor { get; set; }
     }
 
-    class Database
+    public class Database
     {
         static public DecryptedMedicalHistory getMedicalHistory( string emId ) {
             byte[] encrypted_emId = Crypto.EncryptAes(emId, App.pkey, App.salt);
