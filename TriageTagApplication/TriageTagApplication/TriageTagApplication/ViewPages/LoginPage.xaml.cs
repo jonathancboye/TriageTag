@@ -26,7 +26,7 @@ namespace TriageTagApplication
         // Grab database file from Ftp server
         async private Task updateDatabase() {
             connectionStatus.IsVisible = true;
-            bool updated = await DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/" + App.DatabaseFilename, "Triage", "1234" );
+            bool updated = await DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/", App.DatabaseFilename, "Triage", "1234" );
 
             if ( updated ) {
                 connectionStatus.TextColor = Color.Green;

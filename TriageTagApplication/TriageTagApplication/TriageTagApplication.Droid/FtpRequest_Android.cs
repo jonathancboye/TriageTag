@@ -24,10 +24,10 @@ namespace TriageTagApplication.Droid
     {
         public FtpRequest_Android() { }
 
-        async public Task<bool> FtpRequest( string ftpUri, string username, string password ) {
+        async public Task<bool> FtpRequest( string ftpUri, string filename, string username, string password ) {
             
             // Start Ftp client
-            FtpWebRequest webrequest = WebRequest.Create( ftpUri ) as FtpWebRequest;
+            FtpWebRequest webrequest = WebRequest.Create( ftpUri + filename ) as FtpWebRequest;
 
             // Ftp server uses passive mode
             webrequest.UsePassive = true;
@@ -47,7 +47,7 @@ namespace TriageTagApplication.Droid
 
                 // Write response stream to file
                 Stream stream = response.GetResponseStream();
-                string sqliteFilename = "database.db3";
+                string sqliteFilename = filename;
                 string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 string filePath = Path.Combine( folderPath, sqliteFilename );
 
