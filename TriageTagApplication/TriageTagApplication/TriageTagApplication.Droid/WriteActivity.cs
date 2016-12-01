@@ -59,18 +59,26 @@ namespace TriageTagApplication.Droid
         }
 
         private void initializeScrollView() {
-            EditText employeeId = FindViewById<EditText>(Resource.Id.employeeId);
+            TextView employeeId = FindViewById<TextView>(Resource.Id.employeeId);
             LinearLayout linLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
             List<DecryptedEmployee> employees = Database.getAllEmployees();
 
-            foreach(DecryptedEmployee employee in employees ) {
+            for(int i=0; i < employees.Count; i++) {
+                DecryptedEmployee employee = employees[i];
                 TextView tview = new TextView(this) {
                     Text = employee.lastname + ", " + employee.firstname,
                     Clickable = true,
                     Gravity = GravityFlags.Center,
-                    TextSize = 20
+                    TextSize = 30,
                 };
 
+                if(i%2 == 0 ) {
+                    tview.SetBackgroundColor( Android.Graphics.Color.Brown);
+                }else {
+                    tview.SetBackgroundColor( Android.Graphics.Color.Purple);
+                }
+
+                tview.SetPadding( 0, 60, 0, 60 );
                 tview.Click += delegate {
                     employeeId.Text = employee.employeeId;
                 };
@@ -81,7 +89,7 @@ namespace TriageTagApplication.Droid
         }
 
         private void OnWriteButtonClicked( object sender, EventArgs eventArgs ) {
-            EditText employeeId = FindViewById<EditText>(Resource.Id.employeeId);
+            TextView employeeId = FindViewById<TextView>(Resource.Id.employeeId);
 
             if ( employeeId.Text == string.Empty ) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -133,10 +141,7 @@ namespace TriageTagApplication.Droid
                     ndef.Close();
                 }catch (Exception exception ) {
                     System.Diagnostics.Debug.WriteLine( exception.ToString() );
-        
-                    nfcAdapter.DisableForegroundDispatch( this );
                     writingToTage = false;
-
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
                     alert.SetTitle( "ERROR" );
                     alert.SetMessage( "Failed to write tag.Try again" );

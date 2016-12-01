@@ -17,14 +17,16 @@
             android:layout_height="match_parent"
             android:id="@+id/linearLayout" />
     </ScrollView>
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="64.5dp"
         android:id="@+id/employeeId"
         android:hint="Employee ID"
         android:layout_marginTop="53.5dp"
         android:layout_marginBottom="49.5dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="40sp"/>
     <Button
         android:text="Write To Tag"
         android:layout_width="match_parent"

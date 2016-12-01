@@ -41,6 +41,7 @@ namespace TriageTagApplication
 
         public void createEmployeeTable( SQLiteConnection connection ) {
             connection.CreateTable<EncryptedEmployee>();
+
             connection.Insert(
                 Database.encryptEmployee(
                     Database.createDecryptedEmployee(
@@ -50,21 +51,44 @@ namespace TriageTagApplication
                     "880 West Alkaline Springs rd",
                     "937-371-3348",
                     "Mr. Robot Chicken" ) ) );
+
+            connection.Insert(
+                Database.encryptEmployee(
+                    Database.createDecryptedEmployee(
+                        "2",
+                        "Troy",
+                        "Caplinger",
+                        "123 NoWhere",
+                        "222-555-4444",
+                        "Dogg The Bounty Hunter" ) ) );
         }
 
 
         public void createMedicalHistoryTable( SQLiteConnection connection ) {
             connection.CreateTable<EncryptedMedicalHistory>();
+
             connection.Insert(
                 Database.encryptMedicalHistory(
                     Database.createDecryptedMedicalHistory(
-                        "1", 
-                        "cats, dogs, horses, dust", 
-                        "O", 
-                        "Atheist", 
+                        "1",
+                        "cats, dogs, horses, dust",
+                        "O",
+                        "Atheist",
                         "no",
-                        "inhaler", 
+                        "inhaler",
                         "Dr. Randel" ) ) );
+
+
+            connection.Insert(
+                Database.encryptMedicalHistory(
+                    Database.createDecryptedMedicalHistory(
+                        "2",
+                        "monkey poop",
+                        "B+",
+                        "Pluming",
+                        "yes",
+                        "Everything under the sun",
+                        "Dr. Tommy Pickels" ) ) );
         }
     }
 }

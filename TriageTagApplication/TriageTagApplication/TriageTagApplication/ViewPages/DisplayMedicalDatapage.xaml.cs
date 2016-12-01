@@ -22,7 +22,7 @@ namespace TriageTagApplication
         private void makeGrid() {
             int numberOfLables = 6; // Number of columns in the Medical History Table
 
-            mhistory = Database.getMedicalHistory( App.UID );
+            mhistory = Database.getMedicalHistory( _employeeId );
             if (mhistory == null) {
                 // No medical history found
                 System.Diagnostics.Debug.WriteLine( "No medical history" );
