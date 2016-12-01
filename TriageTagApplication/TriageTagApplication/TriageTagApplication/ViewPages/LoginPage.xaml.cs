@@ -22,7 +22,7 @@ namespace TriageTagApplication
                 updateDatabase();
             }
         }
-        
+
         // Grab database file from Ftp server
         async private Task updateDatabase() {
             connectionStatus.IsVisible = true;
@@ -31,7 +31,7 @@ namespace TriageTagApplication
             if ( updated ) {
                 connectionStatus.TextColor = Color.Green;
                 connectionStatus.Text = "Successfully updated database";
-            }else {
+            } else {
                 connectionStatus.Text = "Database not updated";
             }
         }
@@ -60,17 +60,19 @@ namespace TriageTagApplication
         }
 
         async private void makeConnection() {
+
             // Connect to database file
-            App.dbConnection = await DependencyService.Get<ISQLite>().getConnection(App.DatabaseFilename);
+            if ( App.DEBUG ) {
+                App.dbConnection = await DependencyService.Get<ISQLite>().getTestConnection();
+            }else {
+                App.dbConnection = await DependencyService.Get<ISQLite>().getConnection( App.DatabaseFilename );
+            }
 
             // Login failed
             if ( App.dbConnection == null ) {
                 await DisplayAlert( "ERROR", "Failed to create a connection with the database", "Close" );
                 return;
             }
-
-            // Create test database
-            //TestDatabase testDatabase =  new TestDatabase( App.dbConnection );
 
             connectionMade = true;
             validate();

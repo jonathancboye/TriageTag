@@ -31,8 +31,8 @@ namespace TriageTagApplication.Droid
             // Ftp server uses passive mode
             webrequest.UsePassive = true;
 
-            // Set timeout to 5 seconds
-            webrequest.Timeout = 5000; 
+            // Set timeout to 15 seconds
+            webrequest.Timeout = 15000; 
 
             // Set credientials
             webrequest.Credentials = new NetworkCredential( username, password);
@@ -42,7 +42,7 @@ namespace TriageTagApplication.Droid
 
             try {
                 // Make request and get response
-                FtpWebResponse response = webrequest.GetResponse() as FtpWebResponse;
+                FtpWebResponse response = await webrequest.GetResponseAsync() as FtpWebResponse;
 
                 // Write response stream to file
                 Stream stream = response.GetResponseStream();

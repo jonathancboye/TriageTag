@@ -13,6 +13,9 @@ namespace TriageTagApplication
         // Returns: SQLiteConnection from a database file
         Task<SQLiteConnection> getConnection(string filename);
 
+        // Returns: SQLiteConnection from a database file
+        Task<SQLiteConnection> getTestConnection();
+
         // Copy file to Ftp Server
         Task copyFileToFtpServer(string filename);
     }

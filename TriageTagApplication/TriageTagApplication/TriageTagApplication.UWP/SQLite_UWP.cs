@@ -47,6 +47,24 @@ namespace TriageTagApplication.UWP
             return null;
         }
 
+        async public Task<SQLiteConnection> getTestConnection() {
+
+            string filename = "test.db3";
+
+            // Folder to store database for application to access
+            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+
+            // Copy database file from FTP server to local application folder
+            StorageFile databaseFile = await localFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting );
+
+            // Create SQLiteConnection
+            SQLiteConnection connection = new SQLiteConnection( new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), databaseFile.Path );
+
+            new TestDatabase( connection );
+
+            return connection;
+        }
+
         async public Task copyFileToFtpServer(string filename) {
             // Folder where local database is located
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;

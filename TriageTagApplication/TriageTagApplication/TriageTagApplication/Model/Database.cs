@@ -8,7 +8,7 @@ using SQLite.Net;
 
 namespace TriageTagApplication
 {
-    class EncryptedUser
+    public class EncryptedUser
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace TriageTagApplication
         public byte[] userLvl { get; set; }
     }
 
-    class DecryptedUser
+    public class DecryptedUser
     {
         public string employeeId { get; set; }
         public string username { get; set; }
@@ -27,7 +27,7 @@ namespace TriageTagApplication
         public string userLvl { get; set; }
     }
 
-    class EncryptedEmployee
+    public class EncryptedEmployee
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -40,7 +40,7 @@ namespace TriageTagApplication
         public byte[] emergencyContact { get; set; }
     }
 
-    class DecryptedEmployee
+    public class DecryptedEmployee
     {
         public string employeeId { get; set; }
         public string firstname { get; set; }
@@ -50,7 +50,7 @@ namespace TriageTagApplication
         public string emergencyContact { get; set; }
     }
 
-    class EncryptedMedicalHistory
+    public class EncryptedMedicalHistory
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -64,7 +64,7 @@ namespace TriageTagApplication
         public byte[] primaryDoctor { get; set; }
     }
 
-    class DecryptedMedicalHistory
+    public class DecryptedMedicalHistory
     {
         public string employeeId { get; set; }
         public string allergies { get; set; }
@@ -75,7 +75,7 @@ namespace TriageTagApplication
         public string primaryDoctor { get; set; }
     }
 
-    class Database
+    public class Database
     {
         static public DecryptedMedicalHistory getMedicalHistory( string emId ) {
             byte[] encrypted_emId = Crypto.EncryptAes(emId, App.pkey, App.salt);
@@ -88,17 +88,26 @@ namespace TriageTagApplication
             }
         }
 
-        static public List<String> getAllusers()
+        static public List<string> getAllusers()
         {
-            List<String> users = new List<String>();
+            List<string> users = new List<string>();
             List<EncryptedEmployee> encryps = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee");
 
             foreach(EncryptedEmployee en in encryps){
                 DecryptedEmployee names = decryptEmployee(en);
                 users.Add(names.firstname + " " + names.lastname);
             }
-
             return users;
+        }
+
+        static public List<DecryptedEmployee> getAllEmployees() {
+            List<EncryptedEmployee> encryps = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee");
+            List<DecryptedEmployee> decryps = new List<DecryptedEmployee>();
+
+            foreach(EncryptedEmployee employee in encryps ) {
+                decryps.Add( decryptEmployee( employee ) );
+            }
+            return decryps;
         }
 
         static public byte[] getEmployeeIdFromName(byte[] first, byte[] last)
