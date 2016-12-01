@@ -20,7 +20,7 @@ namespace TriageTagApplication
             } else if ( Device.OS == TargetPlatform.Android ) {
                 editMedicalDataButton.IsVisible = false;
                 addUserButton.IsVisible = false;
-                
+                deleteUser.IsVisible = false;       
             }
         }
 

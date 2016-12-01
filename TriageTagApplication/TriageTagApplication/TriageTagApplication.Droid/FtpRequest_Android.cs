@@ -15,6 +15,7 @@ using Android.Widget;
 
 using TriageTagApplication.Droid;
 using Xamarin.Forms;
+using SQLite.Net;
 
 [assembly: Dependency( typeof(FtpRequest_Android) )]
 namespace TriageTagApplication.Droid

@@ -18,15 +18,15 @@ using TriageTagApplication.Droid;
 using Xamarin.Forms;
 using Xamarin.Android;
 #pragma warning disable CS1998 
-[assembly: Dependency ( typeof( SQLite_Android ) )]
+[assembly: Dependency( typeof( SQLite_Android ) )]
 namespace TriageTagApplication.Droid
 {
-    class SQLite_Android: ISQLite
+    class SQLite_Android : ISQLite
     {
         public SQLite_Android() { }
 
         // Returns: SQLiteConnection from a database file
-        async public Task<SQLiteConnection> getConnection(string filename) {
+        async public Task<SQLiteConnection> getConnection( string filename ) {
             //File IO on Android is done with System.IO API
 
             //This is an example of how one might creat a connection to a database file
@@ -63,6 +63,6 @@ namespace TriageTagApplication.Droid
         }
 
         // TODO: Does nothing. Need to restructure code should not be in this class
-        async public Task copyFileToFtpServer(string filename){ }
+        async public Task copyFileToFtpServer( string filename ) { }
     }
 }

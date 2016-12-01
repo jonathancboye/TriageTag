@@ -22,7 +22,7 @@ namespace TriageTagApplication
         }
 
         private void OnSyncButtonClicked( object sender, EventArgs e ) {
-            DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/database.db3", "Triage", "1234" );
+            DependencyService.Get<IFtpRequest>().FtpRequest( "ftp://jonathancboye.duckdns.org:20201/" + App.DatabaseFilename, "Triage", "1234" );
         }
     }
 }
