@@ -88,17 +88,26 @@ namespace TriageTagApplication
             }
         }
 
-        static public List<String> getAllusers()
+        static public List<string> getAllusers()
         {
-            List<String> users = new List<String>();
+            List<string> users = new List<string>();
             List<EncryptedEmployee> encryps = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee");
 
             foreach(EncryptedEmployee en in encryps){
                 DecryptedEmployee names = decryptEmployee(en);
                 users.Add(names.firstname + " " + names.lastname);
             }
-
             return users;
+        }
+
+        static public List<DecryptedEmployee> getAllEmployees() {
+            List<EncryptedEmployee> encryps = App.dbConnection.Query<EncryptedEmployee>("SELECT * FROM EncryptedEmployee");
+            List<DecryptedEmployee> decryps = new List<DecryptedEmployee>();
+
+            foreach(EncryptedEmployee employee in encryps ) {
+                decryps.Add( decryptEmployee( employee ) );
+            }
+            return decryps;
         }
 
         static public byte[] getEmployeeIdFromName(byte[] first, byte[] last)

@@ -68,8 +68,6 @@ namespace TriageTagApplication
                 App.dbConnection = await DependencyService.Get<ISQLite>().getConnection( App.DatabaseFilename );
             }
 
-          
-
             // Login failed
             if ( App.dbConnection == null ) {
                 await DisplayAlert( "ERROR", "Failed to create a connection with the database", "Close" );

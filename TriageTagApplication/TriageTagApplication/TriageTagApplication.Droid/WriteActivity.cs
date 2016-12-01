@@ -59,11 +59,23 @@ namespace TriageTagApplication.Droid
         }
 
         private void initializeScrollView() {
+            EditText employeeId = FindViewById<EditText>(Resource.Id.employeeId);
             LinearLayout linLayout = FindViewById<LinearLayout>(Resource.Id.linearLayout);
-            List<string> users = Database.getAllusers();
+            List<DecryptedEmployee> employees = Database.getAllEmployees();
 
-            foreach(string user in users ) {
-                linLayout.AddView( new TextView( this ) );
+            foreach(DecryptedEmployee employee in employees ) {
+                TextView tview = new TextView(this) {
+                    Text = employee.lastname + ", " + employee.firstname,
+                    Clickable = true,
+                    Gravity = GravityFlags.Center,
+                    TextSize = 20
+                };
+
+                tview.Click += delegate {
+                    employeeId.Text = employee.employeeId;
+                };
+
+                linLayout.AddView(tview);
             }
 
         }

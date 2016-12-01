@@ -24,7 +24,7 @@ namespace TriageTagApplication
              admin should have the ability to add new users and other features.*/
             connection.Insert(
                 Database.encryptUser(
-                    Database.createDecryptedUser( "1", "Jonathan", "Carpenter", "2" ) ) );
+                    Database.createDecryptedUser( "1", "j", "j", "2" ) ) );
 
             connection.Insert(
                 Database.encryptUser(
