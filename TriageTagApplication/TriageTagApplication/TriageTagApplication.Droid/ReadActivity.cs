@@ -85,7 +85,7 @@ namespace TriageTagApplication.Droid
 
                     NdefMessage ndfMessage = ndef.NdefMessage;
                     NdefRecord[] ndfRecords = ndfMessage.GetRecords();
-                    string payload = new string( Encoding.ASCII.GetChars( ndfRecords[0].GetPayload() ) );
+                    string payload = Crypto.DecryptAes(ndfRecords[0].GetPayload(), App.pkey, App.salt);
                     if ( ndfRecords != null ) {
                         Intent returnIntent = new Intent();
                         returnIntent.PutExtra( "message", payload );

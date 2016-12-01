@@ -22,7 +22,7 @@ namespace TriageTagApplication.Droid
         NfcAdapter nfcAdapter;
         PendingIntent pendingintent;
         IntentFilter[] intentFilters;
-        string messageToWrite;
+        byte[] messageToWrite;
         bool writingToTage;
 
         //string appMime = "application/TriageTagApplication";
@@ -95,7 +95,7 @@ namespace TriageTagApplication.Droid
                 dialog.Show();
             } else {
                 if ( !writingToTage ) {
-                    messageToWrite = employeeId.Text;
+                    messageToWrite = Crypto.EncryptAes(employeeId.Text, App.pkey, App.salt);
                     nfcAdapter.EnableForegroundDispatch( this, pendingintent, intentFilters, null );
                     writingToTage = true;
                 }
@@ -118,12 +118,11 @@ namespace TriageTagApplication.Droid
 
         protected override void OnNewIntent( Intent intent ) {
             Tag tag = intent.GetParcelableExtra( NfcAdapter.ExtraTag ) as Tag;
-            if ( messageToWrite == string.Empty ) {
+            if ( messageToWrite == null ) {
                 System.Diagnostics.Debug.WriteLine( "Empty String" );
                 return;
             } 
-            NdefRecord ndfRecord = NdefRecord.CreateMime( System.Net.Mime.MediaTypeNames.Text.Plain,
-               Encoding.ASCII.GetBytes( messageToWrite ) );
+            NdefRecord ndfRecord = NdefRecord.CreateMime( "Application/TriageTag", messageToWrite );
             NdefMessage ndfMessage = new NdefMessage( ndfRecord );
 
             var ndef = Ndef.Get(tag);
