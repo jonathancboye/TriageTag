@@ -38,38 +38,33 @@ namespace TriageTagApplication
 
                 if ( checkUserName() && checkUserLvl() ) {
 
-                    App.dbConnection.Insert( 
+                    App.dbConnection.Insert(
                         Database.encryptUser(
-                            new DecryptedUser {
-                                employeeId = emId,
-                                username = userField.Text,
-                                password = passField.Text,
-                                userLvl = ulvlField.Text
-                            } ) );
+                            Database.createDecryptedUser( emId, 
+                            userField.Text, 
+                            passField.Text, 
+                            ulvlField.Text ) ) );
+                            
 
-                    App.dbConnection.Insert( 
+                    App.dbConnection.Insert(
                         Database.encryptEmployee(
-                            new DecryptedEmployee {
-                                employeeId = emId,
-                                address = addressField.Text,
-                                phonenumber = phoneField.Text,
-                                emergencyContact = emergField.Text,
-                                firstname = fnmField.Text,
-                                lastname = lnField.Text,
-                            } ) );
+                            Database.createDecryptedEmployee( emId,
+                            fnmField.Text,
+                            lnField.Text,
+                            addressField.Text,
+                            phoneField.Text,
+                            emergField.Text ) ) );
 
                     App.dbConnection.Insert(
                         Database.encryptMedicalHistory(
-                            new DecryptedMedicalHistory {
-                                employeeId = emId,
-                                allergies = "",
-                                bloodType = "",
-                                religion = "",
-                                highBloodPressure = "",
-                                medications = "",
-                                primaryDoctor = "",
-                            } ) );
-
+                            Database.createDecryptedMedicalHistory( emId, 
+                            "", 
+                            "", 
+                            "", 
+                            "", 
+                            "", 
+                            "" ) ) );
+                           
                     errorReset();
                     clearFields();
 
