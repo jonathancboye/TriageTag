@@ -17,7 +17,7 @@
                 <Setter Property="HorizontalOptions"
                         Value="Start" />
                 <Setter Property="WidthRequest"
-                        Value="100" />
+                        Value="175" />
                 <Setter Property="FontSize"
                         Value="18" />
             </Style>
@@ -27,7 +27,7 @@
                 <Setter Property="HorizontalOptions"
                         Value="End" />
                 <Setter Property="WidthRequest"
-                        Value="50" />
+                        Value="100" />
                 <Setter Property="TextColor"
                         Value="Red" />
                 <Setter Property="IsVisible"
