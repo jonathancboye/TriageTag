@@ -5,51 +5,27 @@
     <StackLayout VerticalOptions="Fill"
                  HorizontalOptions="Fill">
         <Button x:Name="scanTagButton"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
                 Text="Scan Tag"
-                FontSize="Large"
-                Font="Bold"
                 Clicked="OnScanTagButtonClicked"/>
         
         <Button x:Name="editMedicalDataButton"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
                 Text="Edit Medical Data"
-                FontSize="Large"
-                Font="Bold"
                 Clicked="OnEditMedicalDataButtonClicked"/>
 
         <Button x:Name="synchronizeButton"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
                 Text="Synchronize"
-                FontSize="Large"
-                Font="Bold"
                 Clicked="OnSynchronizeButtonClicked"/>
       
       <Button x:Name="addUserButton"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand"
                Text="Add New User"
-               FontSize="Large"
-               Font="Bold"
                Clicked="OnaddUserButtonClicked"/>
 
-      <Button x:Name="deleteUser"
-              VerticalOptions="CenterAndExpand"
-              HorizontalOptions="CenterAndExpand"
+      <Button x:Name="deleteUser"          
               Text="Delete User"
-              FontSize="Large"
-              Font="Bold"
               Clicked="OndeleteButtonClicked"/>
       
         <Button x:Name="logoutButton"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand"
                 Text="Logout Button"
-                FontSize="Large"
-                Font="Bold" 
                 Clicked="OnLogoutButtonClicked"/>
     </StackLayout>
 </ContentPage>

@@ -8,27 +8,15 @@
 
         <Button x:Name="editButton"
                 Text="Edit"
-                Font="Bold"
-                FontSize="Large"
                 IsEnabled="False"
-                BackgroundColor="Gray"
-                VerticalOptions="End"
                 Clicked="OnEditButtonClicked" />
 
         <Button x:Name="saveButton"
                 Text="Save"
-                Font="Bold"
-                FontSize="Large"
-                BackgroundColor="Gray"
-                VerticalOptions="End"
                 Clicked="OnSaveButtonClicked" />
         
         <Button x:Name="backButton"
                 Text="Back"
-                Font="Bold"
-                FontSize="Large"
-                BackgroundColor="Gray"
-                VerticalOptions="End"
                 Clicked="OnbackButtonClicked" />
     </StackLayout>
 </ContentPage>

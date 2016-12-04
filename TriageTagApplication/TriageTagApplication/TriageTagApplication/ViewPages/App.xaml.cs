@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace TriageTagApplication
 {
-    public class App: Application
+    public partial class App : Application
     {
         public static SQLiteConnection dbConnection; // Database Connection
         public static string UID; // Current logged in user
@@ -17,11 +17,12 @@ namespace TriageTagApplication
         public const string pkey = "btggX!AFnvAOEe7P";
         public const string DatabaseFilename = "test.db3";
         public const bool DEBUG = false;
-       
 
 
-        public App() {         
-            MainPage = new NavigationPage(new LoginPage());
+
+        public App() {
+            InitializeComponent();
+            MainPage = new NavigationPage( new LoginPage() );
         }
 
         protected override void OnStart() {

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TriageTagApplication.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor"
+                        Value="Yellow" />
+            </Style>
+            
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor"
+                        Value="Navy" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="HorizontalOptions"
+                        Value="Fill" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor"
+                        Value="Green" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor"
+                        Value="Black" />
+                <Setter Property="TextColor"
+                        Value="Lime" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="HorizontalOptions"
+                        Value="Fill" />
+                <Setter Property="VerticalOptions"
+                        Value="Fill" />
+                <Setter Property="BackgroundColor"
+                        Value="Yellow" />
+                <Setter Property="TextColor"
+                        Value="Lime" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

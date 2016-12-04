@@ -4,23 +4,13 @@
              x:Class="TriageTagApplication.LoginPage">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Fill"
-                     HorizontalOptions="Fill"
-                     BackgroundColor="White">
+                     HorizontalOptions="Fill" >
 
-            <Label Text="Triage Tag Application"
-                   HorizontalTextAlignment="Center"
-                   VerticalOptions="StartAndExpand"
-                   TextColor="Black"
-                   Font="Bold"
-                   FontSize="Large" />
+            <Label Text="Triage Tag Application" />
 
             <StackLayout VerticalOptions="Fill"
                          HorizontalOptions="Fill">
-                <Label x:Name="connectionStatus"
-                       Text="Attempting to connect to database"
-                       TextColor="Red"
-                       IsVisible="False" />
-                
+
                 <Label x:Name="invalidText"
                        Text="Invalid Username/Password"
                        TextColor="Red"
@@ -38,12 +28,13 @@
 
             <Button x:Name="loginButton"
                     Text="Login"
-                    Font="Large"
-                    VerticalOptions="EndAndExpand"
-                    HorizontalOptions="CenterAndExpand"
                     IsEnabled="False"
-                    BackgroundColor="Gray"
                     Clicked="OnLoginButtonClicked" />
+            
+            <Label x:Name="connectionStatus"
+                   Text="Attempting to connect to database"
+                   TextColor="Red"
+                   IsVisible="False" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
