@@ -22,21 +22,26 @@ namespace TriageTagApplication
             await Navigation.PopAsync();
         }
 
-        private void OngenEmClicked( object sender, EventArgs E ) {
+        //private void OngenEmClicked( object sender, EventArgs E ) {
 
-            if ( formComplete() ) {
-                emId = fnmField.Text + lnField.Text + new Random().Next( 1, 1000 ).ToString();
-                emError.IsVisible = false;
-                emField.Text = emId;
+        //    if ( formComplete() ) {
+        //        emId = fnmField.Text + lnField.Text + new Random().Next( 1, 1000 ).ToString();
+        //        emError.IsVisible = false;
+        //        emField.Text = emId;
 
-            } else { emError.IsVisible = true; }
-        }
+        //    } else { emError.IsVisible = true; }
+        //}
 
         async private void OnSaveButtonClicked( object sender, EventArgs e ) {
 
             if ( formComplete() ) {
 
                 if ( checkUserName() && checkUserLvl() ) {
+
+                    //generate emID
+                    emId = fnmField.Text + lnField.Text + new Random().Next(1, 1000).ToString();
+                    emError.IsVisible = false;
+                    emField.Text = emId;
 
                     App.dbConnection.Insert(
                         Database.encryptUser(
