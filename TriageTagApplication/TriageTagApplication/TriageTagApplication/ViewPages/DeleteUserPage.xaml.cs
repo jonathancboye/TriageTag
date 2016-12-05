@@ -15,16 +15,18 @@ namespace TriageTagApplication
         String currentFirst = "";
         String currentLast = "";
         byte[] emID = null;
+
+        Picker picker = new Picker
+        {
+            Title = "Users",
+
+            WidthRequest = 200
+        };
         public DeleteUserPage()
         {
             InitializeComponent();
 
-            Picker picker = new Picker
-            {
-                Title = "Users",
-               
-                WidthRequest = 200
-            };
+            
 
             setUserNames();
 
@@ -86,6 +88,7 @@ namespace TriageTagApplication
             if(emID != null)
             {
                 Database.deleteUser(emID);
+                picker.Items.Remove(currentFirst + " " + currentLast);
             }
            
         }

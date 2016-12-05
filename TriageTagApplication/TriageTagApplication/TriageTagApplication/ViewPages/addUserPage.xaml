@@ -187,20 +187,15 @@
             <Label x:Name="emLbl"
                    Style="{StaticResource descriptionStyle}">
                 <Label.Text>Employee ID</Label.Text>
+              <Label.IsVisible>False</Label.IsVisible>
             </Label>
 
             <Entry x:Name="emField"
                    IsEnabled="False"
                    Style="{StaticResource entryStyle}">
                 <Entry.Placeholder>Press generate button</Entry.Placeholder>
+              <Entry.IsVisible>False</Entry.IsVisible>
             </Entry>
-
-            <Button x:Name="genEm"
-                    WidthRequest="90"
-                    FontAttributes="Bold"
-                    Clicked="OngenEmClicked">
-                <Button.Text>Generate</Button.Text>
-            </Button>
 
             <Label x:Name="emError"
                    Style="{StaticResource errorStyle}">
