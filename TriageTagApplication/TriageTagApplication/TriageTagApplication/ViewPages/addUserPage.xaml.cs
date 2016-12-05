@@ -63,12 +63,12 @@ namespace TriageTagApplication
                     App.dbConnection.Insert(
                         Database.encryptMedicalHistory(
                             Database.createDecryptedMedicalHistory( emId, 
-                            "", 
-                            "", 
-                            "", 
-                            "", 
-                            "", 
-                            "" ) ) );
+                            " ", 
+                            " ", 
+                            " ", 
+                            " ", 
+                            " ", 
+                            " " ) ) );
                            
                     errorReset();
                     clearFields();
