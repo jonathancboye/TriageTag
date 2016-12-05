@@ -13,6 +13,12 @@ namespace TriageTagApplication
             createUserTable( connection );
             createEmployeeTable( connection );
             createMedicalHistoryTable( connection );
+
+            Random random = new Random();
+            for ( int i = 0; i < 30; i++ ) {
+
+                insertRandomUsers( connection );
+            }
         }
 
         public void createUserTable( SQLiteConnection connection ) {
@@ -37,6 +43,48 @@ namespace TriageTagApplication
             connection.Insert(
                 Database.encryptUser(
                     Database.createDecryptedUser( "4", "Vincent", "Haenni", "1" ) ) );
+        }
+
+        void insertRandomUsers( SQLiteConnection connection ) {
+            Random random = new Random();
+            string fname = createRandomName(random);
+            string lname = createRandomName(random);
+            string eid = fname + lname + random.Next( 1, 1000 );
+
+            connection.Insert(
+                Database.encryptUser(
+                    Database.createDecryptedUser( eid,
+                    fname,
+                    createRandomName( random ),
+                    "1" ) ) );
+
+            connection.Insert(
+                Database.encryptEmployee(
+                    Database.createDecryptedEmployee( eid,
+                    fname,
+                    lname,
+                    createRandomName( random ),
+                    randomPhonenumber(),
+                    createRandomName( random ) ) ) );
+        }
+
+        string createRandomName( Random random ) {
+            List<char> letters = new List<char>();
+            int size = random.Next(5, 10);
+            for ( int i = 0; i < size; i++ ) {
+                letters.Add( System.Convert.ToChar( random.Next( 65, 90 ) ) );
+            }
+
+            return string.Join( "", letters.ToArray() );
+        }
+
+        string randomPhonenumber() {
+            Random random = new Random();
+            List<int> numbers = new List<int>();
+            for ( int i = 0; i < 10; i++ ) {
+                numbers.Add( random.Next( 0, 9 ) );
+            }
+            return string.Join( "", numbers.ToArray() );
         }
 
         public void createEmployeeTable( SQLiteConnection connection ) {

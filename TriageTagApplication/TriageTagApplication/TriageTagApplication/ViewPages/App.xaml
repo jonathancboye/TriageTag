@@ -4,6 +4,16 @@
              x:Class="TriageTagApplication.App">
     <Application.Resources>
         <ResourceDictionary>
+            <OnPlatform x:Key="buttonMargins"
+                        x:TypeArguments="Thickness"
+                        Android="0,0,0,0"
+                        WinPhone="400,0,400,0" />
+
+            <OnPlatform x:Key="buttonHeightRequest"
+                        x:TypeArguments="x:Int32"
+                        Android="50"
+                        WinPhone="100" />
+
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor"
                         Value="Yellow" />
@@ -19,8 +29,14 @@
                         Value="Fill" />
                 <Setter Property="VerticalOptions"
                         Value="CenterAndExpand" />
+                <Setter Property="Margin"
+                        Value="{StaticResource buttonMargins}" />
+                <Setter Property="HeightRequest"
+                        Value="{StaticResource buttonHeightRequest}" />
                 <Setter Property="BackgroundColor"
-                        Value="#76323F" />
+                        Value="#4484CE" />
+                <Setter Property="TextColor"
+                        Value="#F5F5F5" />
                 <Setter Property="FontSize"
                         Value="Large" />
             </Style>

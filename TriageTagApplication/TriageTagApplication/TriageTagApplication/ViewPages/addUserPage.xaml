@@ -42,7 +42,7 @@
     </ContentPage.Resources>
 
     <StackLayout Spacing="20"
-                 BackgroundColor="#557082"
+                 BackgroundColor="#D7CEC7"
                  Margin="0,0,0,0">
         <StackLayout Orientation="Horizontal">
             <Label x:Name="fnmLbl"
