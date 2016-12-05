@@ -38,15 +38,16 @@ namespace TriageTagApplication
 
             picker.SelectedIndexChanged += (sender, args) =>
             {
-                 
-                string name = picker.Items[picker.SelectedIndex];
-                string[] splitName = name.Split(' ');
-                currentFirst = splitName[0];
-                currentLast = splitName[1];
+                if ( picker.SelectedIndex != -1 ) {
+                    string name = picker.Items[picker.SelectedIndex];
+                    string[] splitName = name.Split(' ');
+                    currentFirst = splitName[0];
+                    currentLast = splitName[1];
 
-                if(currentFirst != "" && currentLast != "")
-                {
-                    emID = Database.getEmployeeIdFromName(Database.encrypt(currentFirst), Database.encrypt(currentLast));
+                    if ( currentFirst != "" && currentLast != "" ) {
+                        emID = Database.getEmployeeIdFromName( Database.encrypt( currentFirst ), Database.encrypt( currentLast ) );
+                    }
+
                 }
                 
             };

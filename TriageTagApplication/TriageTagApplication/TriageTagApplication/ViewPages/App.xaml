@@ -11,7 +11,7 @@
             
             <Style TargetType="StackLayout">
                 <Setter Property="BackgroundColor"
-                        Value="Navy" />
+                        Value="#D7CEC7" />
             </Style>
 
             <Style TargetType="Button">
@@ -20,7 +20,7 @@
                 <Setter Property="VerticalOptions"
                         Value="CenterAndExpand" />
                 <Setter Property="BackgroundColor"
-                        Value="Green" />
+                        Value="#76323F" />
                 <Setter Property="FontSize"
                         Value="Large" />
             </Style>
@@ -30,10 +30,8 @@
                         Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions"
                         Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor"
-                        Value="Black" />
                 <Setter Property="TextColor"
-                        Value="Lime" />
+                        Value="#565656" />
                 <Setter Property="FontSize"
                         Value="Large" />
                 <Setter Property="FontAttributes"
@@ -46,14 +44,13 @@
                 <Setter Property="VerticalOptions"
                         Value="Fill" />
                 <Setter Property="BackgroundColor"
-                        Value="Yellow" />
+                        Value="#C09F80" />
                 <Setter Property="TextColor"
-                        Value="Lime" />
+                        Value="Black" />
                 <Setter Property="FontSize"
                         Value="Large" />
                 <Setter Property="FontAttributes"
                         Value="Bold" />
-
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -2,9 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriageTagApplication.LoginPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="buttonMarginValue"
+                        x:TypeArguments="Thickness"
+                        Android="0,0,0,0"
+                        WinPhone="400,0,400,0" />
+            
+            <OnPlatform x:Key="entryMarginValue"
+                        x:TypeArguments="Thickness"
+                        Android="0,0,0,0"
+                        WinPhone="400,0,400,0" />
+            
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <Setter Property="HorizontalOptions"
+                        Value="Fill" />
+                <Setter Property="VerticalOptions"
+                        Value="Fill" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="Margin"
+                        Value="{StaticResource entryMarginValue}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="Fill"
-                     HorizontalOptions="Fill" >
+                     HorizontalOptions="Fill">
 
             <Label Text="Triage Tag Application" />
 
@@ -15,22 +41,25 @@
                        Text="Invalid Username/Password"
                        TextColor="Red"
                        IsVisible="False" />
-                
+
                 <Entry x:Name="username"
                        Placeholder="Username"
-                       TextChanged="OnTextChanged" />
-               
+                       TextChanged="OnTextChanged"
+                       Style="{StaticResource entryStyle}"/>
+
                 <Entry x:Name="password"
                        Placeholder="Password"
-                       IsPassword="True" 
-                       TextChanged="OnTextChanged" />
+                       IsPassword="True"
+                       TextChanged="OnTextChanged" 
+                       Style="{StaticResource entryStyle}"/>
             </StackLayout>
 
             <Button x:Name="loginButton"
                     Text="Login"
                     IsEnabled="False"
-                    Clicked="OnLoginButtonClicked" />
-            
+                    Clicked="OnLoginButtonClicked"
+                    Margin="{StaticResource buttonMarginValue}" />
+
             <Label x:Name="connectionStatus"
                    Text="Attempting to connect to database"
                    TextColor="Red"
