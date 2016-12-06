@@ -88,6 +88,17 @@ namespace TriageTagApplication
             }
         }
 
+        static public DecryptedEmployee getEmployee( string emId ) {
+            byte[] encrypted_emId = Crypto.EncryptAes(emId, App.pkey, App.salt);
+            List<EncryptedEmployee> employees = App.dbConnection.Query<EncryptedEmployee>( "SELECT * FROM EncryptedEmployee WHERE employeeId=?", encrypted_emId );
+            if ( employees.Count != 1 ) {
+                return null;
+            } else {
+                EncryptedEmployee employee = employees[0];
+                return decryptEmployee ( employee );
+            }
+        }
+
         static public List<string> getAllusers()
         {
             List<string> users = new List<string>();
