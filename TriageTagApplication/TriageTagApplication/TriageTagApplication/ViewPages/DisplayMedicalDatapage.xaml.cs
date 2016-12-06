@@ -58,9 +58,9 @@ namespace TriageTagApplication
             // Alternate row colors in grid
             Color bgColor;
             if ( rownumber % 2 == 0 ) {
-                bgColor = Color.Fuchsia;
+                bgColor = Color.FromHex( "#D7CEC7" );
             } else {
-                bgColor = Color.Aqua;
+                bgColor = Color.FromHex( "#D7CEC7" );
             }
 
             // add label description to grid
